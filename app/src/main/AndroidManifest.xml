@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OLD_SCHOOL_STORE_APP">
-        <activity android:name=".views.main.MainActivity">
+        <activity android:name=".views.tutorial.TutorialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
