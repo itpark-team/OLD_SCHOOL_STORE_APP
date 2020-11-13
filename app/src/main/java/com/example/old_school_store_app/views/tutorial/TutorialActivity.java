@@ -27,7 +27,7 @@ public class TutorialActivity extends AppCompatActivity {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int[] layoutIds = new int[]{R.layout.first_page, R.layout.second_page};
+        int[] layoutIds = new int[]{R.layout.test, R.layout.first_page, R.layout.second_page};
 
         for (int i = 0; i < layoutIds.length; i++)
         {
