@@ -1,17 +1,25 @@
 package com.example.old_school_store_app.models.tables;
 
-public class TableUser
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.old_school_store_app.models.entities.User;
+import com.example.old_school_store_app.models.tools.DbHelper;
+
+import java.util.ArrayList;
+
+public class TableUsers
 {
     private DbHelper dbHelper;
 
-    public TableUser(DbHelper dbHelper)
+    public TableUsers(DbHelper dbHelper)
     {
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<TableUser> getAll()
+    public ArrayList<User> getAll()
     {
-        ArrayList<TableUser> tableUsers = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -21,7 +29,7 @@ public class TableUser
 
         while (cursor.moveToNext() == true)
         {
-            TableUser tableUser = new TableUser(
+            User user = new User(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -31,12 +39,12 @@ public class TableUser
                     cursor.getString(6)
             );
 
-            tableUsers.add(tableUser);
+            users.add(user);
         }
 
         cursor.close();
         dbHelper.close();
 
-        return tableUsers;
+        return users;
     }
 }

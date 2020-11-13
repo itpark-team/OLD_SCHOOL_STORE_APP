@@ -1,4 +1,4 @@
-package com.example.old_school_store_app.models.tools;
+package com.example.old_school_store_app.models;
 
 import java.util.HashMap;
 import java.util.Map;
