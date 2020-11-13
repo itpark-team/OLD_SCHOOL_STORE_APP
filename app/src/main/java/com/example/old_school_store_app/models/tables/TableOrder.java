@@ -1,6 +1,12 @@
 package com.example.old_school_store_app.models.tables;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.example.old_school_store_app.models.entities.CartItem;
+import com.example.old_school_store_app.models.tools.DbHelper;
+
+import java.util.ArrayList;
 
 public class TableOrder {
 

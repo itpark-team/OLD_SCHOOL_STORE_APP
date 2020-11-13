@@ -1,17 +1,17 @@
 package com.example.old_school_store_app.models.tables;
 
-public class TablesCategory
+public class TableCategory
 {
     private DbHelper dbHelper;
 
-    public TablesCategory(DbHelper dbHelper)
+    public TableCategory(DbHelper dbHelper)
     {
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<TablesCategory> getAll()
+    public ArrayList<TableCategory> getAll()
     {
-        ArrayList<TablesCategory> tablesCategorys = new ArrayList<>();
+        ArrayList<TableCategory> tablesCategorys = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -21,13 +21,13 @@ public class TablesCategory
 
         while (cursor.moveToNext() == true)
         {
-            TablesCategory tablesCategory = new TablesCategory(
+            TableCategory tableCategory = new TableCategory(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2)
             );
 
-            tablesCategorys.add(tablesCategory);
+            tablesCategorys.add(tableCategory);
         }
 
         cursor.close();
