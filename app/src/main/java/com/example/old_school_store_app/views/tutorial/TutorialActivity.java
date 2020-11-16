@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.old_school_store_app.R;
@@ -27,7 +25,7 @@ public class TutorialActivity extends AppCompatActivity {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int[] layoutIds = new int[]{R.layout.test, R.layout.first_page, R.layout.second_page};
+        int[] layoutIds = new int[]{R.layout.test, R.layout.first_page, R.layout.first_page};
 
         for (int i = 0; i < layoutIds.length; i++)
         {
