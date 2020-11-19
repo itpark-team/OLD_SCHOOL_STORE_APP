@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/training2">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="168dp"
+        android:layout_height="54dp"
+        android:background="@null"
         android:onClick="onButtonNextClick"
-        android:text="MoveNext"
-        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924" />
+        app:layout_constraintVertical_bias="0.763"
+        app:srcCompat="@drawable/button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

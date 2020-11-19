@@ -8,6 +8,36 @@
     android:orientation="vertical"
     tools:context=".views.tutorial.TutorialActivity">
 
+    <android.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#673AB7">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="63dp"
+                android:layout_height="wrap_content"
+                android:rotation="-21"
+                tools:srcCompat="@drawable/stsenarist_novoj_ekranizatsii_mortal_kombat_zajmyotsya_filmom_po_space_invaders" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="OLD SCHOOL STORE"
+                android:textColor="#FFFFFF"
+                android:textSize="33sp" />
+        </LinearLayout>
+
+
+    </android.widget.Toolbar>
+
     <ViewFlipper
         android:id="@+id/viewFlipperPages"
         android:layout_width="match_parent"
