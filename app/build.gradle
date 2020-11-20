@@ -29,7 +29,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src/main/res', 'src/main/res/layouts/tutorial-activity', 'src/main/res/layouts/main-activity', 'src/main/res/layouts/user-fragment', 'src/main/res/layouts/search-fragment', 'src/main/res/layouts/catalog-fragment', 'src/main/res/layouts/map-fragment', 'src/main/res/layouts/cart-fragment', 'src/main/res/drawables/tutorial', 'src/main/res/drawables/products', 'src/main/res/anims/tutotial', 'src/main/res/anims/main'
+                srcDirs 'src/main/res', 'src/main/res/layouts/tutorial-activity', 'src/main/res/layouts/main-activity', 'src/main/res/layouts/user-fragment', 'src/main/res/layouts/search-fragment', 'src/main/res/layouts/catalog-fragment', 'src/main/res/layouts/map-fragment', 'src/main/res/layouts/cart-fragment', 'src/main/res/drawables/tutorial', 'src/main/res/drawables/products', 'src/main/res/anims/tutotial', 'src/main/res/anims/main', 'src/main/res/menu', 'src/main/res/menus/main', 'src/main/res/menus/cart', 'src/main/res/drawables/main'
             }
         }
     }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayoutMain"
+    android:id="@+id/relativeLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".views.tutorial.TutorialActivity">
 
-    <android.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolBarMain"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#673AB7">
@@ -23,7 +24,7 @@
                 android:layout_width="63dp"
                 android:layout_height="wrap_content"
                 android:rotation="-21"
-                tools:srcCompat="@drawable/stsenarist_novoj_ekranizatsii_mortal_kombat_zajmyotsya_filmom_po_space_invaders" />
+                tools:srcCompat="@drawable/crab" />
 
             <TextView
                 android:id="@+id/textView"
@@ -31,16 +32,17 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="OLD SCHOOL STORE"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/purple_200"
                 android:textSize="33sp" />
         </LinearLayout>
 
 
-    </android.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <ViewFlipper
         android:id="@+id/viewFlipperPages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ViewFlipper>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolBarMain"></ViewFlipper>
 
-</LinearLayout>
+</RelativeLayout>

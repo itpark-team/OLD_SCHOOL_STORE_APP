@@ -6,8 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AnimationUtils;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.example.old_school_store_app.R;
@@ -22,6 +22,10 @@ public class TutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();//отключил верхнюю плашку
         setContentView(R.layout.activity_tutorial);
+
+        Toolbar toolbar = findViewById(R.id.toolBarMain);//tool bar
+
+        //setSupportActionBar(toolbar);
 
         viewFlipperPages = findViewById(R.id.viewFlipperPages);
 
