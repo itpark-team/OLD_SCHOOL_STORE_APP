@@ -3,6 +3,7 @@ package com.example.old_school_store_app.views.tutorial;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.views.main.MainActivity;
 
 public class TutorialActivity extends AppCompatActivity {
 
@@ -60,6 +62,12 @@ public class TutorialActivity extends AppCompatActivity {
             viewFlipperPages.showNext();
             indexCurPage++;
         }
+    }
+
+    public void onButtonFinishClick(View view)
+    {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
 
