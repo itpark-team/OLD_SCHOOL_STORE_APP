@@ -12,62 +12,31 @@ import androidx.appcompat.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.controllers.tutorial.ControllerTutorialActivity;
 import com.example.old_school_store_app.views.main.MainActivity;
 
 public class TutorialActivity extends AppCompatActivity {
 
-    ViewFlipper viewFlipperPages;
-    int indexCurPage, countPages;
+    private ControllerTutorialActivity controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//отключил верхнюю плашку
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_tutorial);
 
-        Toolbar toolbar = findViewById(R.id.toolBarMain);//tool bar
-
-        //setSupportActionBar(toolbar);
-
-        viewFlipperPages = findViewById(R.id.viewFlipperPages);
-
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        int[] layoutIds = new int[]{
-                R.layout.first_page,
-                R.layout.second_page,
-                R.layout.third_page,
-                R.layout.fourth_page,
-                R.layout.fifth_page,
-                R.layout.sixth_page,
-                R.layout.seventh_page,
-        };
-
-        for (int i = 0; i < layoutIds.length; i++)
-        {
-            viewFlipperPages.addView(inflater.inflate(layoutIds[i], null));
-        }
-
-        indexCurPage=0;
-        countPages = layoutIds.length;
+        controller = new ControllerTutorialActivity(this);
+        controller.InitializeViewFlipper();
     }
 
     public void onButtonNextClick(View view)
     {
-        if(indexCurPage<countPages-1)
-        {
-            viewFlipperPages.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.go_next_in));
-            viewFlipperPages.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.go_next_out));
-
-            viewFlipperPages.showNext();
-            indexCurPage++;
-        }
+        controller.GoToNextPage();
     }
 
     public void onButtonFinishClick(View view)
     {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        controller.OpenMainActivity();
     }
 
 

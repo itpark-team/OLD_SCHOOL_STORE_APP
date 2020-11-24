@@ -54,7 +54,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
-        android:id="@+id/frameLayoutMain"
+        android:id="@+id/fragmentsContainerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigationViewMain"
