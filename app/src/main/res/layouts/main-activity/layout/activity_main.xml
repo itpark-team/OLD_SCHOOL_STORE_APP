@@ -6,36 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".views.main.MainActivity" >
 
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolBarMain"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutHeaderMain"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#673AB7">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="OLD SCHOOL STORE"
+            android:textColor="@color/purple_200"
+            android:textSize="33sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="63dp"
-                android:layout_height="wrap_content"
-                android:rotation="-21"
-                tools:srcCompat="@drawable/crab" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="OLD SCHOOL STORE"
-                android:textColor="@color/purple_200"
-                android:textSize="33sp" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="86dp"
+            android:layout_height="58dp"
+            android:rotation="-21"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/crab"
+            tools:srcCompat="@drawable/crab" />
 
 
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -58,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigationViewMain"
-        android:layout_below="@id/toolBarMain"
+        android:layout_below="@id/constraintLayoutHeaderMain"
         android:layout_marginBottom="0dp">
 
     </FrameLayout>
