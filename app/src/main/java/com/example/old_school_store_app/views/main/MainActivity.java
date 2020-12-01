@@ -9,8 +9,6 @@ import com.example.old_school_store_app.controllers.main.ControllerMainActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ControllerMainActivity controller;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -18,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-        controller = new ControllerMainActivity(this);
+        ControllerMainActivity controller = new ControllerMainActivity(this);
+        controller.SaveApplicationContext();
         controller.InitializeFragments();
         controller.InitializeBottomNavigationView();
     }

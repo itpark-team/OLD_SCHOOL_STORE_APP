@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.views.cart.CartFragment;
 import com.example.old_school_store_app.views.catalog.CatalogFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
@@ -29,6 +30,11 @@ public class ControllerMainActivity
     public ControllerMainActivity(MainActivity mainActivity)
     {
         this.mainActivity = mainActivity;
+    }
+
+    public void SaveApplicationContext()
+    {
+        DataStorage.Add("context", mainActivity.getApplicationContext());
     }
 
     public void InitializeFragments()

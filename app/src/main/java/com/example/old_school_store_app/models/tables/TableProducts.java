@@ -18,7 +18,7 @@ public class TableProducts
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<Product> getAll()
+    public ArrayList<Product> GetAll()
     {
         ArrayList<Product> products = new ArrayList<>();
 
