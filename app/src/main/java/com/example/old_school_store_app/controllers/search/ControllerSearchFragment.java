@@ -18,7 +18,7 @@ public class ControllerSearchFragment
     {
         this.view = view;
         Context context = (Context) DataStorage.Get("context");
-        db = DbManager.getInstance(context);
+        db = DbManager.GetInstance(context);
     }
 
     public void InitializeButtonsClick()
@@ -38,7 +38,7 @@ public class ControllerSearchFragment
     private void TextMethod()
     {
         TextView textView = view.findViewById(R.id.textView4);
-        String text = db.getTableProducts().GetAll().get(0).getName();
+        String text = db.GetTableProducts().GetAll().get(0).getName();
         textView.setText(text);
     }
 }

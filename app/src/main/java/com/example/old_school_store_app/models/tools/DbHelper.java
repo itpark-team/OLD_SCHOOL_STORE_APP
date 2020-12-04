@@ -4,15 +4,24 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DbHelper extends SQLiteOpenHelper {
-    public DbHelper(Context context) {
+public class DbHelper extends SQLiteOpenHelper
+{
+    public DbHelper(Context context)
+    {
         super(context,"app.db",null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE IF NOT EXISTS \" products\" (\n" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"categories\" (\n" +
+                "\t\"id\"\tINTEGER NOT NULL,\n" +
+                "\t\"name\"\tTEXT NOT NULL,\n" +
+                "\t\"picture_path\"\tTEXT NOT NULL,\n" +
+                "\tPRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                ");");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"products\" (\n" +
                 "\t\"id\"\tINTEGER NOT NULL,\n" +
                 "\t\"name\"\tTEXT NOT NULL,\n" +
                 "\t\"price\"\tINTEGER NOT NULL,\n" +
@@ -23,9 +32,105 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\tPRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ");");
 
-        //db.execSQL("DELETE FROM products");
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"products_pictures\" (\n" +
+                "\t\"id\"\tINTEGER NOT NULL,\n" +
+                "\t\"product_id\"\tINTEGER NOT NULL,\n" +
+                "\t\"picture_path\"\tTEXT NOT NULL,\n" +
+                "\tPRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                ");");
 
-        db.execSQL("INSERT INTO \" products\" (\"id\",\"name\",\"price\",\"count_purchases\",\"description\",\"category_id\",\"count_left\") VALUES (1,'трусы',0,125,'мужские',0,40);");
+        db.execSQL("DELETE FROM categories");
+        db.execSQL("DELETE FROM products");
+        db.execSQL("DELETE FROM products_pictures");
+
+        db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"picture_path\") VALUES (1,'Консоли','category_console.jpg'),\n" +
+                " (2,'Диски','category_cds.jpg'),\n" +
+                " (3,'Фигурки','category_figures.jpg'),\n" +
+                " (4,'Брелки','category_brelocks.jpg'),\n" +
+                " (5,'Комиксы','category_comixes.jpg');");
+
+        db.execSQL("INSERT INTO \"products\" (\"id\",\"name\",\"price\",\"count_purchases\",\"description\",\"category_id\",\"count_left\") VALUES (1,'Dendy Steepler',1499,20,'Игровая приставка 8-bit Junior 2 Classic mini - классическая модель консоли типа Денди. Всё что необходимо для игры идёт в комплекте (без пистолета)! Гарантия на консоль Dendy - 3 месяца. На комплектующие - 1 месяц! В комплект 8-битной приставки входит: - игровая консоль, - два игровых джойстика (узкий разъём - 9 Pin) - блок питания (сетевой адаптер) - AV кабель - игровой картридж (сборник игр) - инструкция по эксплуатации - гарантийный талон Технические характеристики: Процессор 8 bit Питание 5 V, 300mA Разрешение 320x224 Количество цветов 512 Видео-выход PAL Звуковой выход стерео Совместимость с картриджами 8 bit Вес 770 гр.',1,40),\n" +
+                " (2,'NINTENDO Switch New',22890,23,'Nintendo Switch – инновационная игровая консоль-гибрид. Ее не только можно подключить к телевизору, она также мгновенно превращается в портативную игровую систему с экраном 6,2 дюйма. Впервые игроки смогут наслаждаться масштабными игровыми проектами, типичными для домашних консолей, где угодно и когда угодно. Игровая консоль поддерживает amiibo и многопользовательскую локальную/онлайн игру на 8 человек.',1,39),\n" +
+                " (3,'SEGA MEGA DRIVE 2 16bit',1800,30,'Игровая приставка Sega Mega Drive 2 – классика видеоигр. Она появилась много лет назад и смогла стать настоящей легендой.',1,20),\n" +
+                " (4,'Mortal Kombat',700,50,'Вращающийся брелок с драконом',4,40),\n" +
+                " (5,'Mario',650,55,'Брелок с Марио и Луиджи',4,30),\n" +
+                " (6,'Sonic',675,52,'Брелок с Соником',4,18),\n" +
+                " (7,'человек-павук',699,231,'человек-павук против доктора тентаклойда.',5,23423),\n" +
+                " (8,'Гачи-мучи. Последний славянин.',300,89327647,'Давнее противостояние ♂️facking slave♂️ против его заклятого врага - ♂️dungeon master♂ должно закончиться сегодня️. Сможет ли гг дать ♂️fisting ass♂️ всем врагам и получить свои ♂️300 bucks♂️ обратно?',5,87),\n" +
+                " (9,'Алексей. В поисках смысла.',3,1,'Комикс от неизвестного автора, который продолжает сюжет игры от неизвестного автора(другого автора, не того, кто нарисовал комикс). В общем одно сплошное гейство.',5,100000),\n" +
+                " (10,'Пудж (Pudge) из игры Дота 2\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "',1290,3,'Жирный, гладкий, приятный на вид ',3,13),\n" +
+                " (11,'Соник с кольцом - Sonic the Hedgehog, Funko POP',3200,8,'Виниловая игровая фигурка FUNKO POP! – СОНИК станет замечательным подарком для любителей мультфильма «Соник».\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Дизайн выполнен в японском аниме-стиле «тиби» - персонажи с маленьким туловищем и большой головой\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Высокая детализация обеспечивает максимальное сходство с героем и позволяет сделать игровой процесс более увлекательным!\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Коллекционная фигурка понравится как детям, так и взрослым.\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Игровая фигурка FUNKO POP! способствует развитию воображения, умению играть и эмоциональному развитию.\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Размер фигурки около 9,6 см (в зависимости от аксессуаров).\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Создайте собственную коллекцию FUNKO POP!\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Рекомендовано для детей от 3 лет.',3,62),\n" +
+                " (12,'Фигурка Марио из Super Mario Bros',800,17,'Герой всех времен, великий Марио, не теряет популярность ни на минуту. Каждый ребенок мечтает получить в подарок хотя бы одного героя из мультсериала Супер Марио. Производители пошли навстречу детским желаниям и создали набор из трех миниатюр Марио по старой цене! Создавайте головоломки, стройте замки, играйте вместе с Марио!',3,172),\n" +
+                " (13,'Animal crossing',2000,3443,'игра на nintendo switch',2,5000),\n" +
+                " (14,'Grand theft auto',1000,5000,'игра на PS one',2,5000),\n" +
+                " (15,'Sonic',899,4342,'игра на SEGA MEGA DRIVE 2',2,5000);");
+
+        db.execSQL("INSERT INTO \"products_pictures\" (\"id\",\"product_id\",\"picture_path\") VALUES (1,1,'dendy1.jpg'),\n" +
+                " (2,1,'dendy2.jpg'),\n" +
+                " (3,2,'nintendo1.jpg'),\n" +
+                " (4,2,'nintendo2.jpg'),\n" +
+                " (5,2,'nintendo3.jpg'),\n" +
+                " (6,3,'sega1.jpg'),\n" +
+                " (7,3,'sega2.jpg'),\n" +
+                " (8,4,'mk1.jpg'),\n" +
+                " (9,4,'mk2.jpg'),\n" +
+                " (10,5,'mariob1.jpg'),\n" +
+                " (11,5,'mariob2.jpg'),\n" +
+                " (12,5,'mariob3.jpg'),\n" +
+                " (13,6,'sonicb1.jpg'),\n" +
+                " (14,7,'sp1.jpg'),\n" +
+                " (15,8,'gachi1.jpg'),\n" +
+                " (16,9,'asmysl.jpg'),\n" +
+                " (17,10,'pudg1.jpg'),\n" +
+                " (18,10,'pudg2.jpg'),\n" +
+                " (19,10,'pudg3.jpg'),\n" +
+                " (20,11,'sonick1.jpg'),\n" +
+                " (21,11,'sonick2.jpg'),\n" +
+                " (22,11,'sonick3.jpg'),\n" +
+                " (23,12,'mariof1.jpg'),\n" +
+                " (24,12,'mariof2.jpg'),\n" +
+                " (25,12,'mariof3.jpg'),\n" +
+                " (26,13,'animalcrossing1.jpg'),\n" +
+                " (27,13,'animalcrossing2.png'),\n" +
+                " (28,13,'animalcrossing3.jpg'),\n" +
+                " (29,14,'gta1.png'),\n" +
+                " (30,14,'gta2.jpg'),\n" +
+                " (31,15,'sonicg1.jpg'),\n" +
+                " (32,15,'sonicg2.jpg'),\n" +
+                " (33,15,'sonicg3.jpg');");
+
     }
 
     @Override

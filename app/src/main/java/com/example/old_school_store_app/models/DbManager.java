@@ -11,11 +11,14 @@ import com.example.old_school_store_app.models.tables.TableProductsPictures;
 import com.example.old_school_store_app.models.tables.TableUsers;
 import com.example.old_school_store_app.models.tools.DbHelper;
 
-public class DbManager {
+public class DbManager
+{
     private static DbManager instance = null;
 
-    public static DbManager getInstance(Context context) {
-        if (instance==null){
+    public static DbManager GetInstance(Context context)
+    {
+        if (instance==null)
+        {
             instance = new DbManager(context);
         }
         return instance;
@@ -30,7 +33,8 @@ public class DbManager {
     private TableUsers tableUsers;
 
 
-    private DbManager(Context context){
+    private DbManager(Context context)
+    {
         DbHelper dbHelper = new DbHelper(context);
 
         tableCartItem = new TableCart(dbHelper);
@@ -43,31 +47,31 @@ public class DbManager {
 
     }
 
-    public TableCart getTableCartItem() {
+    public TableCart GetTableCartItem() {
         return tableCartItem;
     }
 
-    public TableCategories getTableCategories() {
+    public TableCategories GetTableCategories() {
         return tableCategories;
     }
 
-    public TableOrders getTableOrders() {
+    public TableOrders GetTableOrders() {
         return tableOrders;
     }
 
-    public TableOrdersProducts getTableOrdersProducts() {
+    public TableOrdersProducts GetTableOrdersProducts() {
         return tableOrdersProducts;
     }
 
-    public TableProducts getTableProducts() {
+    public TableProducts GetTableProducts() {
         return tableProducts;
     }
 
-    public TableProductsPictures getTableProductsPictures() {
+    public TableProductsPictures GetTableProductsPictures() {
         return tableProductsPictures;
     }
 
-    public TableUsers getTableUsers() {
+    public TableUsers GetTableUsers() {
         return tableUsers;
     }
 

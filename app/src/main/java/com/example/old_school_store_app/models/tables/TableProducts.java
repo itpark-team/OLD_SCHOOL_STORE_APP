@@ -24,7 +24,7 @@ public class TableProducts
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM `products`";
+        String sqlCommand = "SELECT * FROM products";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
