@@ -18,7 +18,7 @@ public class TableProductsPictures
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<ProductPicture> getAll()
+    public ArrayList<ProductPicture> GetAll()
     {
         ArrayList<ProductPicture> productPictures = new ArrayList<>();
 
@@ -43,5 +43,30 @@ public class TableProductsPictures
         dbHelper.close();
 
         return productPictures;
+    }
+
+    public ProductPicture GetMainProductPicture(int productId)
+    {
+        ProductPicture productPicture = null;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM products_pictures WHERE product_id="+productId+" LIMIT 1";
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        if (cursor.moveToNext() == true)
+        {
+            productPicture = new ProductPicture(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getString(2)
+            );
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return productPicture;
     }
 }

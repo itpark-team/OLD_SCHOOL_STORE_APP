@@ -97,39 +97,39 @@ public class DbHelper extends SQLiteOpenHelper
                 " (14,'Grand theft auto',1000,5000,'игра на PS one',2,5000),\n" +
                 " (15,'Sonic',899,4342,'игра на SEGA MEGA DRIVE 2',2,5000);");
 
-        db.execSQL("INSERT INTO \"products_pictures\" (\"id\",\"product_id\",\"picture_path\") VALUES (1,1,'dendy1.jpg'),\n" +
-                " (2,1,'dendy2.jpg'),\n" +
-                " (3,2,'nintendo1.jpg'),\n" +
-                " (4,2,'nintendo2.jpg'),\n" +
-                " (5,2,'nintendo3.jpg'),\n" +
-                " (6,3,'sega1.jpg'),\n" +
-                " (7,3,'sega2.jpg'),\n" +
-                " (8,4,'mk1.jpg'),\n" +
-                " (9,4,'mk2.jpg'),\n" +
-                " (10,5,'mariob1.jpg'),\n" +
-                " (11,5,'mariob2.jpg'),\n" +
-                " (12,5,'mariob3.jpg'),\n" +
-                " (13,6,'sonicb1.jpg'),\n" +
-                " (14,7,'sp1.jpg'),\n" +
-                " (15,8,'gachi1.jpg'),\n" +
-                " (16,9,'asmysl.jpg'),\n" +
-                " (17,10,'pudg1.jpg'),\n" +
-                " (18,10,'pudg2.jpg'),\n" +
-                " (19,10,'pudg3.jpg'),\n" +
-                " (20,11,'sonick1.jpg'),\n" +
-                " (21,11,'sonick2.jpg'),\n" +
-                " (22,11,'sonick3.jpg'),\n" +
-                " (23,12,'mariof1.jpg'),\n" +
-                " (24,12,'mariof2.jpg'),\n" +
-                " (25,12,'mariof3.jpg'),\n" +
-                " (26,13,'animalcrossing1.jpg'),\n" +
-                " (27,13,'animalcrossing2.png'),\n" +
-                " (28,13,'animalcrossing3.jpg'),\n" +
-                " (29,14,'gta1.png'),\n" +
-                " (30,14,'gta2.jpg'),\n" +
-                " (31,15,'sonicg1.jpg'),\n" +
-                " (32,15,'sonicg2.jpg'),\n" +
-                " (33,15,'sonicg3.jpg');");
+        db.execSQL("INSERT INTO \"products_pictures\" (\"id\",\"product_id\",\"picture_path\") VALUES (1,1,'dendy1'),\n" +
+                " (2,1,'dendy2'),\n" +
+                " (3,2,'nintendo1'),\n" +
+                " (4,2,'nintendo2'),\n" +
+                " (5,2,'nintendo3'),\n" +
+                " (6,3,'sega1'),\n" +
+                " (7,3,'sega2'),\n" +
+                " (8,4,'mk1'),\n" +
+                " (9,4,'mk2'),\n" +
+                " (10,5,'mariob1'),\n" +
+                " (11,5,'mariob2'),\n" +
+                " (12,5,'mariob3'),\n" +
+                " (13,6,'sonicb1'),\n" +
+                " (14,7,'sp1'),\n" +
+                " (15,8,'gachi1'),\n" +
+                " (16,9,'asmysl'),\n" +
+                " (17,10,'pudg1'),\n" +
+                " (18,10,'pudg2'),\n" +
+                " (19,10,'pudg3'),\n" +
+                " (20,11,'sonick1'),\n" +
+                " (21,11,'sonick2'),\n" +
+                " (22,11,'sonick3'),\n" +
+                " (23,12,'mariof1'),\n" +
+                " (24,12,'mariof2'),\n" +
+                " (25,12,'mariof3'),\n" +
+                " (26,13,'animalcrossing1'),\n" +
+                " (27,13,'animalcrossing2'),\n" +
+                " (28,13,'animalcrossing3'),\n" +
+                " (29,14,'gta1'),\n" +
+                " (30,14,'gta2'),\n" +
+                " (31,15,'sonicg1'),\n" +
+                " (32,15,'sonicg2'),\n" +
+                " (33,15,'sonicg3');");
 
     }
 

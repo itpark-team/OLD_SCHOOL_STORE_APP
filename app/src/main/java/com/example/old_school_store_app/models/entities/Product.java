@@ -10,6 +10,8 @@ public class Product
     private int categoryId;
     private int countLeft;
 
+    private int mainPicture;
+
 
     public Product(int id, String name, int price, int countPurchases, String description, int categoryId, int countLeft) {
         this.id = id;
@@ -47,5 +49,13 @@ public class Product
 
     public int getCountLeft() {
         return countLeft;
+    }
+
+    public void setMainPicture(int mainPicture) {
+        this.mainPicture = mainPicture;
+    }
+
+    public int getMainPicture() {
+        return mainPicture;
     }
 }

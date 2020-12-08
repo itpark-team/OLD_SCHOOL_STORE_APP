@@ -4,16 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView4"
+    <EditText
+        android:id="@+id/editTextProductNameSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SEARCH FRAGMENT"
-        android:textSize="30sp" />
+        android:ems="10"
+        android:hint="Введите имя товара"
+        android:inputType="textPersonName"
+        android:textSize="24sp" />
 
     <Button
-        android:id="@+id/buttonTestMethod"
+        android:id="@+id/buttonStartSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Найти товар" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
