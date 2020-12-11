@@ -6,6 +6,8 @@ public class Category
     private String name;
     private String picturePath;
 
+    private int pictureId;
+
     public Category(int id, String name, String picturePath) {
         this.id = id;
         this.name = name;
@@ -22,5 +24,13 @@ public class Category
 
     public String getPicturePath() {
         return picturePath;
+    }
+
+    public int getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(int pictureId) {
+        this.pictureId = pictureId;
     }
 }

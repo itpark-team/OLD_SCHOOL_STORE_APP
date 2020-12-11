@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.entities.ProductPicture;
-import com.example.old_school_store_app.views.main.MainActivity;
 
 import java.util.ArrayList;
 
@@ -57,25 +55,25 @@ public class ControllerSearchFragment
 
     public void ShowAllProducts()
     {
-        ArrayList<Product> foundedProducts = db.GetTableProducts().GetAll();
+        ArrayList<Product> allProducts = db.GetTableProducts().GetAll();
 
         Context context = (Context) DataStorage.Get("context");
 
-        for (int i = 0; i < foundedProducts.size(); i++)
+        for (int i = 0; i < allProducts.size(); i++)
         {
-            int id = foundedProducts.get(i).getId();
+            int id = allProducts.get(i).getId();
             ProductPicture picture = db.GetTableProductsPictures().GetMainProductPicture(id);
 
             int mainPicture = context.getResources().getIdentifier(picture.getPicturePath(),"drawable", context.getPackageName());
 
-            foundedProducts.get(i).setMainPicture(mainPicture);
+            allProducts.get(i).setMainPictureId(mainPicture);
         }
 
         RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewSearch.setLayoutManager(glm);
 
-        RvAdapterSearch adapter = new RvAdapterSearch(foundedProducts);
+        RvAdapterSearch adapter = new RvAdapterSearch(allProducts);
         recyclerViewSearch.setAdapter(adapter);
     }
 
@@ -103,7 +101,7 @@ public class ControllerSearchFragment
 
             int mainPicture = context.getResources().getIdentifier(picture.getPicturePath(),"drawable", context.getPackageName());
 
-            foundedProducts.get(i).setMainPicture(mainPicture);
+            foundedProducts.get(i).setMainPictureId(mainPicture);
         }
 
         RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);

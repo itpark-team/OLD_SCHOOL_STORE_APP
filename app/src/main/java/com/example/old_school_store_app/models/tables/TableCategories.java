@@ -17,7 +17,7 @@ public class TableCategories
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<Category> getAll()
+    public ArrayList<Category> GetAll()
     {
         ArrayList<Category> categories = new ArrayList<>();
 

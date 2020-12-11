@@ -10,7 +10,7 @@ public class Product
     private int categoryId;
     private int countLeft;
 
-    private int mainPicture;
+    private int mainPictureId;
 
 
     public Product(int id, String name, int price, int countPurchases, String description, int categoryId, int countLeft) {
@@ -51,11 +51,11 @@ public class Product
         return countLeft;
     }
 
-    public void setMainPicture(int mainPicture) {
-        this.mainPicture = mainPicture;
+    public void setMainPictureId(int mainPictureId) {
+        this.mainPictureId = mainPictureId;
     }
 
-    public int getMainPicture() {
-        return mainPicture;
+    public int getMainPictureId() {
+        return mainPictureId;
     }
 }

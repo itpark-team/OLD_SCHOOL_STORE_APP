@@ -18,14 +18,14 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
 {
     public static class ProductViewHolder extends RecyclerView.ViewHolder
     {
-        public CardView cv;
+        public CardView cvSearch;
         public TextView productName;
         public TextView productPrice;
         public ImageView productPicture;
 
         ProductViewHolder(View itemView) {
             super(itemView);
-            cv = itemView.findViewById(R.id.cv);
+            cvSearch = itemView.findViewById(R.id.cvCatalog);
             productName = itemView.findViewById(R.id.product_name);
             productPrice = itemView.findViewById(R.id.product_price);
             productPicture = itemView.findViewById(R.id.product_picture);
@@ -47,7 +47,7 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_item_view, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_item_view, viewGroup, false);
         ProductViewHolder pvh = new ProductViewHolder(v);
         return pvh;
     }
