@@ -25,10 +25,10 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
 
         ProductViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            productName = (TextView)itemView.findViewById(R.id.product_name);
-            productPrice = (TextView)itemView.findViewById(R.id.product_price);
-            productPicture = (ImageView)itemView.findViewById(R.id.product_picture);
+            cv = itemView.findViewById(R.id.cv);
+            productName = itemView.findViewById(R.id.product_name);
+            productPrice = itemView.findViewById(R.id.product_price);
+            productPicture = itemView.findViewById(R.id.product_picture);
         }
     }
 
@@ -56,8 +56,8 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
     public void onBindViewHolder(ProductViewHolder productViewHolder, int i)
     {
         productViewHolder.productName.setText(products.get(i).getName());
-        productViewHolder.productPrice.setText(products.get(i).getPrice());
-        productViewHolder.productPicture.setImageResource(products.get(i).getMainPicture());
+        productViewHolder.productPrice.setText(Integer.toString(products.get(i).getPrice())+" руб.");//productViewHolder.productPicture.setImageResource(products.get(i).getMainPicture());
+        productViewHolder.productPicture.setImageResource(R.drawable.sonicb11111);
     }
 
     @Override

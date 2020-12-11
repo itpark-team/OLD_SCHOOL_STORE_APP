@@ -19,6 +19,7 @@ public class SearchFragment extends Fragment
 
         ControllerSearchFragment controller = new ControllerSearchFragment(view);
         controller.InitializeButtonsClick();
+        controller.ShowAllProducts();
 
         return view;
     }

@@ -34,6 +34,9 @@ public class ControllerSearchFragment
     {
         Button buttonStartSearch = view.findViewById(R.id.buttonStartSearch);
         buttonStartSearch.setOnClickListener(OnButtonStartSearchClickListener);
+
+        Button buttonResetSearch = view.findViewById(R.id.buttonResetSearch);
+        buttonResetSearch.setOnClickListener(OnButtonResetSearchClickListener);
     }
 
     private View.OnClickListener OnButtonStartSearchClickListener = new View.OnClickListener() {
@@ -43,6 +46,46 @@ public class ControllerSearchFragment
             SearchMethod();
         }
     };
+
+    private View.OnClickListener OnButtonResetSearchClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view)
+        {
+            ResetSearch();
+        }
+    };
+
+    public void ShowAllProducts()
+    {
+        ArrayList<Product> foundedProducts = db.GetTableProducts().GetAll();
+
+        Context context = (Context) DataStorage.Get("context");
+
+        for (int i = 0; i < foundedProducts.size(); i++)
+        {
+            int id = foundedProducts.get(i).getId();
+            ProductPicture picture = db.GetTableProductsPictures().GetMainProductPicture(id);
+
+            int mainPicture = context.getResources().getIdentifier(picture.getPicturePath(),"drawable", context.getPackageName());
+
+            foundedProducts.get(i).setMainPicture(mainPicture);
+        }
+
+        RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
+        GridLayoutManager glm = new GridLayoutManager(context,2);
+        recyclerViewSearch.setLayoutManager(glm);
+
+        RvAdapterSearch adapter = new RvAdapterSearch(foundedProducts);
+        recyclerViewSearch.setAdapter(adapter);
+    }
+
+    private void ResetSearch()
+    {
+        EditText editTextProductName = view.findViewById(R.id.editTextProductNameSearch);
+        editTextProductName.setText("");
+
+        ShowAllProducts();
+    }
 
     private void SearchMethod()
     {
@@ -61,12 +104,11 @@ public class ControllerSearchFragment
             int mainPicture = context.getResources().getIdentifier(picture.getPicturePath(),"drawable", context.getPackageName());
 
             foundedProducts.get(i).setMainPicture(mainPicture);
-
         }
 
         RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
-        GridLayoutManager llm = new GridLayoutManager(context,2);
-        recyclerViewSearch.setLayoutManager(llm);
+        GridLayoutManager glm = new GridLayoutManager(context,2);
+        recyclerViewSearch.setLayoutManager(glm);
 
         RvAdapterSearch adapter = new RvAdapterSearch(foundedProducts);
         recyclerViewSearch.setAdapter(adapter);
