@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app2.db",null,1);
+        super(context,"app3.db",null,1);
     }
 
     @Override
@@ -43,11 +43,11 @@ public class DbHelper extends SQLiteOpenHelper
         db.execSQL("DELETE FROM products");
         db.execSQL("DELETE FROM products_pictures");
 
-        db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"picture_path\") VALUES (1,'Консоли','category_console.jpg'),\n" +
-                " (2,'Диски','category_cds.jpg'),\n" +
-                " (3,'Фигурки','category_figures.jpg'),\n" +
-                " (4,'Брелки','category_brelocks.jpg'),\n" +
-                " (5,'Комиксы','category_comixes.jpg');");
+        db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"picture_path\") VALUES (1,'Консоли','category_console'),\n" +
+                " (2,'Диски','category_cds'),\n" +
+                " (3,'Фигурки','category_figures'),\n" +
+                " (4,'Брелки','category_brelocks'),\n" +
+                " (5,'Комиксы','category_comixes');");
 
         db.execSQL("INSERT INTO \"products\" (\"id\",\"name\",\"price\",\"count_purchases\",\"description\",\"category_id\",\"count_left\") VALUES (1,'Dendy Steepler',1499,20,'Игровая приставка 8-bit Junior 2 Classic mini - классическая модель консоли типа Денди. Всё что необходимо для игры идёт в комплекте (без пистолета)! Гарантия на консоль Dendy - 3 месяца. На комплектующие - 1 месяц! В комплект 8-битной приставки входит: - игровая консоль, - два игровых джойстика (узкий разъём - 9 Pin) - блок питания (сетевой адаптер) - AV кабель - игровой картридж (сборник игр) - инструкция по эксплуатации - гарантийный талон Технические характеристики: Процессор 8 bit Питание 5 V, 300mA Разрешение 320x224 Количество цветов 512 Видео-выход PAL Звуковой выход стерео Совместимость с картриджами 8 bit Вес 770 гр.',1,40),\n" +
                 " (2,'NINTENDO Switch New',22890,23,'Nintendo Switch – инновационная игровая консоль-гибрид. Ее не только можно подключить к телевизору, она также мгновенно превращается в портативную игровую систему с экраном 6,2 дюйма. Впервые игроки смогут наслаждаться масштабными игровыми проектами, типичными для домашних консолей, где угодно и когда угодно. Игровая консоль поддерживает amiibo и многопользовательскую локальную/онлайн игру на 8 человек.',1,39),\n" +

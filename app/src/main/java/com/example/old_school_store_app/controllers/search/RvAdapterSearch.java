@@ -47,7 +47,7 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_item_view, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_item_view, viewGroup, false);
         ProductViewHolder pvh = new ProductViewHolder(v);
         return pvh;
     }
