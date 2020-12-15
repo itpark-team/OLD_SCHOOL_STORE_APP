@@ -22,14 +22,17 @@ public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.Cate
     {
         public CardView cvCatalog;
         public TextView categoryName;
+        public TextView categoryDescription;
         public ImageView categoryPicture;
 
         CategoryViewHolder(View itemView)
         {
             super(itemView);
             cvCatalog = itemView.findViewById(R.id.cvCatalog);
-            categoryName = itemView.findViewById(R.id.category_name);
-            categoryPicture = itemView.findViewById(R.id.category_picture);
+            categoryName = itemView.findViewById(R.id.categoryName);
+            categoryDescription = itemView.findViewById(R.id.categoryDescription);
+
+            categoryPicture = itemView.findViewById(R.id.categoryPicture);
         }
     }
 
@@ -57,6 +60,7 @@ public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.Cate
     public void onBindViewHolder(RvAdapterCatalog.CategoryViewHolder categoryViewHolder, int i)
     {
         categoryViewHolder.categoryName.setText(categories.get(i).getName());
+        categoryViewHolder.categoryDescription.setText(categories.get(i).getDescription());
         categoryViewHolder.categoryPicture.setImageResource(categories.get(i).getPictureId());
     }
 

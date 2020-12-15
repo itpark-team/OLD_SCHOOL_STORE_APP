@@ -66,19 +66,19 @@ public class ControllerMainActivity
 
             switch (item.getItemId())
             {
-                case R.id.action_user:
+                case R.id.actionUser:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, userFragment);
                     break;
-                case R.id.action_search:
+                case R.id.actionSearch:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, searchFragment);
                     break;
-                case R.id.action_catalog:
+                case R.id.actionCatalog:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogFragment);
                     break;
-                case R.id.action_map:
+                case R.id.actionMap:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, mapFragment);
                     break;
-                case R.id.action_cart:
+                case R.id.actionCart:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, cartFragment);
                     break;
             }

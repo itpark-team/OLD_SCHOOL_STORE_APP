@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app3.db",null,1);
+        super(context,"app.db",null,1);
     }
 
     @Override
@@ -17,6 +17,7 @@ public class DbHelper extends SQLiteOpenHelper
         db.execSQL("CREATE TABLE IF NOT EXISTS \"categories\" (\n" +
                 "\t\"id\"\tINTEGER NOT NULL,\n" +
                 "\t\"name\"\tTEXT NOT NULL,\n" +
+                "\t\"description\"\tTEXT NOT NULL,\n" +
                 "\t\"picture_path\"\tTEXT NOT NULL,\n" +
                 "\tPRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ");");
@@ -43,11 +44,11 @@ public class DbHelper extends SQLiteOpenHelper
         db.execSQL("DELETE FROM products");
         db.execSQL("DELETE FROM products_pictures");
 
-        db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"picture_path\") VALUES (1,'Консоли','category_console'),\n" +
-                " (2,'Диски','category_cds'),\n" +
-                " (3,'Фигурки','category_figures'),\n" +
-                " (4,'Брелки','category_brelocks'),\n" +
-                " (5,'Комиксы','category_comixes');");
+        db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"description\",\"picture_path\") VALUES (1,'Консоли','лёгкое, компактное, портативное электронное устройство, предназначенное для того, чтобы играть в видеоигры.','category_console'),\n" +
+                " (2,'Диски','Игра, которая предназначена для игр на типа игровой консоли.','category_cds'),\n" +
+                " (3,'Фигурки','коллекционная фигурка, обычно изготовленная из пластмассы.','category_figures'),\n" +
+                " (4,'Брелки','аксессуар, украшение, выполненное в виде подвески на цепочке, браслете, кольце для ключей и другое.','category_brelocks'),\n" +
+                " (5,'Комиксы','рисованная история, рассказ в картинках.','category_comixes');");
 
         db.execSQL("INSERT INTO \"products\" (\"id\",\"name\",\"price\",\"count_purchases\",\"description\",\"category_id\",\"count_left\") VALUES (1,'Dendy Steepler',1499,20,'Игровая приставка 8-bit Junior 2 Classic mini - классическая модель консоли типа Денди. Всё что необходимо для игры идёт в комплекте (без пистолета)! Гарантия на консоль Dendy - 3 месяца. На комплектующие - 1 месяц! В комплект 8-битной приставки входит: - игровая консоль, - два игровых джойстика (узкий разъём - 9 Pin) - блок питания (сетевой адаптер) - AV кабель - игровой картридж (сборник игр) - инструкция по эксплуатации - гарантийный талон Технические характеристики: Процессор 8 bit Питание 5 V, 300mA Разрешение 320x224 Количество цветов 512 Видео-выход PAL Звуковой выход стерео Совместимость с картриджами 8 bit Вес 770 гр.',1,40),\n" +
                 " (2,'NINTENDO Switch New',22890,23,'Nintendo Switch – инновационная игровая консоль-гибрид. Ее не только можно подключить к телевизору, она также мгновенно превращается в портативную игровую систему с экраном 6,2 дюйма. Впервые игроки смогут наслаждаться масштабными игровыми проектами, типичными для домашних консолей, где угодно и когда угодно. Игровая консоль поддерживает amiibo и многопользовательскую локальную/онлайн игру на 8 человек.',1,39),\n" +

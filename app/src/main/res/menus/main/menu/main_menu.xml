@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_user"
+        android:id="@+id/actionUser"
         android:icon="@drawable/homeelement"
         android:title="User" />
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/actionSearch"
         android:icon="@drawable/searchelement"
         android:title="Search"
         />
     <item
-        android:id="@+id/action_catalog"
+        android:id="@+id/actionCatalog"
         android:icon="@drawable/catalogelement"
         android:title="Catalog" />
     <item
-        android:id="@+id/action_map"
+        android:id="@+id/actionMap"
         android:icon="@drawable/mapelement"
         android:title="Map" />
     <item
-        android:id="@+id/action_cart"
+        android:id="@+id/actionCart"
         android:icon="@drawable/basketelement"
         android:title="Cart" />
 

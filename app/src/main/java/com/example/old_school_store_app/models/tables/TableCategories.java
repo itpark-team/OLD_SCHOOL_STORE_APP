@@ -32,7 +32,8 @@ public class TableCategories
             Category category = new Category(
                     cursor.getInt(0),
                     cursor.getString(1),
-                    cursor.getString(2)
+                    cursor.getString(2),
+                    cursor.getString(3)
             );
 
             categories.add(category);
