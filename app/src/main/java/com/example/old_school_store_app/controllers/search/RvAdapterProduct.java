@@ -14,7 +14,7 @@ import com.example.old_school_store_app.models.entities.Product;
 
 import java.util.ArrayList;
 
-public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.ProductViewHolder>
+public class RvAdapterProduct extends RecyclerView.Adapter<RvAdapterProduct.ProductViewHolder>
 {
     public static class ProductViewHolder extends RecyclerView.ViewHolder
     {
@@ -34,7 +34,7 @@ public class RvAdapterSearch extends RecyclerView.Adapter<RvAdapterSearch.Produc
 
     private ArrayList<Product> products;
 
-    public RvAdapterSearch(ArrayList<Product> products)
+    public RvAdapterProduct(ArrayList<Product> products)
     {
         this.products = products;
     }

@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ControllerMainActivity controller = new ControllerMainActivity(this);
-        controller.SaveApplicationContext();
+        controller.SaveApplicationGlobalVariables();
         controller.InitializeFragments();
         controller.InitializeBottomNavigationView();
     }

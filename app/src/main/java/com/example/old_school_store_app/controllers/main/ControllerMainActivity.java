@@ -32,9 +32,10 @@ public class ControllerMainActivity
         this.mainActivity = mainActivity;
     }
 
-    public void SaveApplicationContext()
+    public void SaveApplicationGlobalVariables()
     {
         DataStorage.Add("context", mainActivity.getApplicationContext());
+        DataStorage.Add("mainActivity", mainActivity);
     }
 
     public void InitializeFragments()
