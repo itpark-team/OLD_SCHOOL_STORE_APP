@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.entities.Category;
-import com.example.old_school_store_app.views.catalog.CategoryItemsFragment;
+import com.example.old_school_store_app.views.catalog.CatalogItemsFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
 
 
 import java.util.ArrayList;
 
 
-public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.CategoryViewHolder>
+public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.CatalogViewHolder>
 {
-    public static class CategoryViewHolder extends RecyclerView.ViewHolder
+    public static class CatalogViewHolder extends RecyclerView.ViewHolder
     {
         public CardView cvCatalog;
         public TextView categoryName;
@@ -33,7 +32,7 @@ public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.Cate
         public ImageView categoryPicture;
         public Button buttonGoToCategory;
 
-        CategoryViewHolder(View itemView)
+        CatalogViewHolder(View itemView)
         {
             super(itemView);
             cvCatalog = itemView.findViewById(R.id.cvCatalog);
@@ -57,37 +56,33 @@ public class RvAdapterCatalog extends RecyclerView.Adapter<RvAdapterCatalog.Cate
     }
 
     @Override
-    public RvAdapterCatalog.CategoryViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    public CatalogViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_item_view, viewGroup, false);
-        RvAdapterCatalog.CategoryViewHolder cvh = new RvAdapterCatalog.CategoryViewHolder(v);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.catalog_item_view, viewGroup, false);
+        CatalogViewHolder cvh = new CatalogViewHolder(v);
         return cvh;
     }
 
     @Override
-    public void onBindViewHolder(RvAdapterCatalog.CategoryViewHolder categoryViewHolder, int i)
+    public void onBindViewHolder(CatalogViewHolder catalogViewHolder, int i)
     {
-        categoryViewHolder.categoryName.setText(categories.get(i).getName());
-        categoryViewHolder.categoryDescription.setText(categories.get(i).getDescription());
-        categoryViewHolder.categoryPicture.setImageResource(categories.get(i).getPictureId());
+        catalogViewHolder.categoryName.setText(categories.get(i).getName());
+        catalogViewHolder.categoryDescription.setText(categories.get(i).getDescription());
+        catalogViewHolder.categoryPicture.setImageResource(categories.get(i).getPictureId());
 
-        categoryViewHolder.buttonGoToCategory.setOnClickListener(new View.OnClickListener() {
+        catalogViewHolder.buttonGoToCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                Context context = (Context) DataStorage.Get("context");
-
                 DataStorage.Add("categoryId",categories.get(i).getId());
 
-                //Toast.makeText(context,"AAAAA", Toast.LENGTH_LONG).show();
-
-                CategoryItemsFragment categoryItemsFragment = new CategoryItemsFragment();
+                CatalogItemsFragment catalogItemsFragment = new CatalogItemsFragment();
 
                 MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
                 FragmentTransaction fragmentTransaction;
                 fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentsContainerMain, categoryItemsFragment);
+                fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogItemsFragment);
                 fragmentTransaction.commit();
             }
         });

@@ -1,7 +1,9 @@
 package com.example.old_school_store_app.controllers.catalog;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,15 +14,17 @@ import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.entities.ProductPicture;
+import com.example.old_school_store_app.views.catalog.CatalogFragment;
+import com.example.old_school_store_app.views.main.MainActivity;
 
 import java.util.ArrayList;
 
-public class ControllerCategoryItemsFragment
+public class ControllerCatalogItemsFragment
 {
     private View view;
     private DbManager db;
 
-    public ControllerCategoryItemsFragment(View view)
+    public ControllerCatalogItemsFragment(View view)
     {
         this.view = view;
         Context context = (Context) DataStorage.Get("context");
@@ -55,5 +59,31 @@ public class ControllerCategoryItemsFragment
         RvAdapterProduct adapter = new RvAdapterProduct(foundedProducts);
         recyclerViewCategoryItems.setAdapter(adapter);
 
+    }
+
+    public void InitializeButtonsClick()
+    {
+        Button buttonGoBackToCatalog = view.findViewById(R.id.buttonGoBackToCatalog);
+        buttonGoBackToCatalog.setOnClickListener(OnButtonGoBackToCatalogClickListener);
+    }
+
+    private View.OnClickListener OnButtonGoBackToCatalogClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GoToBackMethod();
+        }
+    };
+
+
+    private void GoToBackMethod()
+    {
+        CatalogFragment catalogFragment = new CatalogFragment();
+
+        MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogFragment);
+        fragmentTransaction.commit();
     }
 }
