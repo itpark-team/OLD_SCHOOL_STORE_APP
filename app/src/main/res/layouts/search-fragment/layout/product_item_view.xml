@@ -34,6 +34,12 @@
             android:layout_height="wrap_content"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/buttonGoToProductInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Подробнее" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
