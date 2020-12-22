@@ -6,6 +6,7 @@ public class ProductPicture
     private int productId;
     private String picturePath;
 
+    private int pictureId;
 
     public ProductPicture(int id, int productId, String picturePath) {
         this.id = id;
@@ -23,5 +24,13 @@ public class ProductPicture
 
     public String getPicturePath() {
         return picturePath;
+    }
+
+    public int getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(int pictureId) {
+        this.pictureId = pictureId;
     }
 }

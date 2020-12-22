@@ -1,8 +1,10 @@
 package com.example.old_school_store_app.controllers.search;
 
+import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,11 +12,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.entities.Product;
+import com.example.old_school_store_app.views.main.MainActivity;
+import com.example.old_school_store_app.views.search.ProductInfoFragment;
 
 import java.util.ArrayList;
 
-public class RvAdapterProduct extends RecyclerView.Adapter<RvAdapterProduct.ProductViewHolder>
+public class RvAdapterProducts extends RecyclerView.Adapter<RvAdapterProducts.ProductViewHolder>
 {
     public static class ProductViewHolder extends RecyclerView.ViewHolder
     {
@@ -22,6 +27,7 @@ public class RvAdapterProduct extends RecyclerView.Adapter<RvAdapterProduct.Prod
         public TextView productName;
         public TextView productPrice;
         public ImageView productPicture;
+        public Button buttonGoToProductInfo;
 
         ProductViewHolder(View itemView) {
             super(itemView);
@@ -29,12 +35,13 @@ public class RvAdapterProduct extends RecyclerView.Adapter<RvAdapterProduct.Prod
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productPicture = itemView.findViewById(R.id.productPicture);
+            buttonGoToProductInfo = itemView.findViewById(R.id.buttonGoToProductInfo);
         }
     }
 
     private ArrayList<Product> products;
 
-    public RvAdapterProduct(ArrayList<Product> products)
+    public RvAdapterProducts(ArrayList<Product> products)
     {
         this.products = products;
     }
@@ -58,6 +65,23 @@ public class RvAdapterProduct extends RecyclerView.Adapter<RvAdapterProduct.Prod
         productViewHolder.productName.setText(products.get(i).getName());
         productViewHolder.productPrice.setText(Integer.toString(products.get(i).getPrice())+" руб.");
         productViewHolder.productPicture.setImageResource(products.get(i).getMainPictureId());
+
+        productViewHolder.buttonGoToProductInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                DataStorage.Add("productId",products.get(i).getId());
+
+                ProductInfoFragment productInfoFragment = new ProductInfoFragment();
+
+                MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+                FragmentTransaction fragmentTransaction;
+                fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentsContainerMain, productInfoFragment);
+                fragmentTransaction.commit();
+            }
+        });
 
     }
 

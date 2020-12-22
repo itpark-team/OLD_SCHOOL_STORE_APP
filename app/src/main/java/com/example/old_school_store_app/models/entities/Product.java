@@ -1,5 +1,7 @@
 package com.example.old_school_store_app.models.entities;
 
+import java.util.ArrayList;
+
 public class Product
 {
     private int id;
@@ -11,7 +13,6 @@ public class Product
     private int countLeft;
 
     private int mainPictureId;
-
 
     public Product(int id, String name, int price, int countPurchases, String description, int categoryId, int countLeft) {
         this.id = id;

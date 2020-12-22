@@ -73,7 +73,7 @@ public class ControllerSearchFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewSearch.setLayoutManager(glm);
 
-        RvAdapterProduct adapter = new RvAdapterProduct(allProducts);
+        RvAdapterProducts adapter = new RvAdapterProducts(allProducts);
         recyclerViewSearch.setAdapter(adapter);
     }
 
@@ -108,7 +108,7 @@ public class ControllerSearchFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewSearch.setLayoutManager(glm);
 
-        RvAdapterProduct adapter = new RvAdapterProduct(foundedProducts);
+        RvAdapterProducts adapter = new RvAdapterProducts(foundedProducts);
         recyclerViewSearch.setAdapter(adapter);
     }
 }

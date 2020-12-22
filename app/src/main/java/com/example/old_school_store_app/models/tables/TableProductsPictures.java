@@ -69,4 +69,31 @@ public class TableProductsPictures
 
         return productPicture;
     }
+
+    public ArrayList<ProductPicture> GetProductPictures(int productId)
+    {
+        ArrayList<ProductPicture> productPictures = new ArrayList<>();
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM products_pictures WHERE product_id="+productId;
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        while (cursor.moveToNext() == true)
+        {
+            ProductPicture productPicture = new ProductPicture(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getString(2)
+            );
+
+            productPictures.add(productPicture);
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return productPictures;
+    }
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.old_school_store_app.R;
-import com.example.old_school_store_app.controllers.search.RvAdapterProduct;
+import com.example.old_school_store_app.controllers.search.RvAdapterProducts;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Product;
@@ -34,10 +34,9 @@ public class ControllerCatalogItemsFragment
     public void ShowProductsByCategory()
     {
         int categoryId = (int)DataStorage.Get("categoryId");
+        DataStorage.Delete("categoryId");
 
         ArrayList<Product> foundedProducts = db.GetTableProducts().GetByCategoryId(categoryId);
-
-        DataStorage.Delete("categoryId");
 
         Context context = (Context) DataStorage.Get("context");
 
@@ -56,7 +55,7 @@ public class ControllerCatalogItemsFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewCategoryItems.setLayoutManager(glm);
 
-        RvAdapterProduct adapter = new RvAdapterProduct(foundedProducts);
+        RvAdapterProducts adapter = new RvAdapterProducts(foundedProducts);
         recyclerViewCategoryItems.setAdapter(adapter);
 
     }

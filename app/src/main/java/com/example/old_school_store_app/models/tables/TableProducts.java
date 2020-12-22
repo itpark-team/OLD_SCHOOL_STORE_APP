@@ -110,4 +110,33 @@ public class TableProducts
 
         return products;
     }
+
+    public Product GetById(int productId)
+    {
+        Product product = null;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM products WHERE id="+productId;
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        if (cursor.moveToNext() == true)
+        {
+             product = new Product(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6)
+            );
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return product;
+    }
 }

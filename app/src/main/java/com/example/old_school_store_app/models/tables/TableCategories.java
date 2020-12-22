@@ -44,4 +44,32 @@ public class TableCategories
 
         return categories;
     }
+
+    public Category GetById(int categoryId)
+    {
+        Category category = null;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM `categories` WHERE id="+categoryId;
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        if (cursor.moveToNext() == true)
+        {
+             category = new Category(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)
+            );
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return category;
+    }
+
+
 }

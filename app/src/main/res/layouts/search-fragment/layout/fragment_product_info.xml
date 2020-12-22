@@ -26,31 +26,36 @@
             android:id="@+id/textViewProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textViewProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewProductCountPurchases"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewProductCountLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewProductCategoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/buttonAddToCart"
@@ -62,7 +67,8 @@
             android:id="@+id/textViewProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>
