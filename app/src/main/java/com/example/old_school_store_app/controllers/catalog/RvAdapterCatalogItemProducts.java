@@ -1,4 +1,4 @@
-package com.example.old_school_store_app.controllers.search;
+package com.example.old_school_store_app.controllers.catalog;
 
 import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -15,11 +15,11 @@ import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.views.main.MainActivity;
-import com.example.old_school_store_app.views.search.ProductInfoFragment;
+import com.example.old_school_store_app.views.search.SearchProductInfoFragment;
 
 import java.util.ArrayList;
 
-public class RvAdapterProducts extends RecyclerView.Adapter<RvAdapterProducts.ProductViewHolder>
+public class RvAdapterCatalogItemProducts extends RecyclerView.Adapter<RvAdapterCatalogItemProducts.ProductViewHolder>
 {
     public static class ProductViewHolder extends RecyclerView.ViewHolder
     {
@@ -41,7 +41,7 @@ public class RvAdapterProducts extends RecyclerView.Adapter<RvAdapterProducts.Pr
 
     private ArrayList<Product> products;
 
-    public RvAdapterProducts(ArrayList<Product> products)
+    public RvAdapterCatalogItemProducts(ArrayList<Product> products)
     {
         this.products = products;
     }
@@ -70,16 +70,16 @@ public class RvAdapterProducts extends RecyclerView.Adapter<RvAdapterProducts.Pr
             @Override
             public void onClick(View view)
             {
-                DataStorage.Add("productId",products.get(i).getId());
+                /*DataStorage.Add("productId",products.get(i).getId());
 
-                ProductInfoFragment productInfoFragment = new ProductInfoFragment();
+                SearchProductInfoFragment productInfoFragment = new SearchProductInfoFragment();
 
                 MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
                 FragmentTransaction fragmentTransaction;
                 fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentsContainerMain, productInfoFragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
             }
         });
 

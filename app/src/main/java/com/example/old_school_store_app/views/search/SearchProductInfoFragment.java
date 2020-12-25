@@ -7,16 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.old_school_store_app.R;
-import com.example.old_school_store_app.controllers.search.ControllerProductInfoFragment;
+import com.example.old_school_store_app.controllers.search.ControllerSearchProductInfoFragment;
 
-public class ProductInfoFragment extends Fragment
+public class SearchProductInfoFragment extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_product_info, container, false);
 
-        ControllerProductInfoFragment controller = new ControllerProductInfoFragment(view);
+        ControllerSearchProductInfoFragment controller = new ControllerSearchProductInfoFragment(view);
         controller.InitializeButtonsClick();
         controller.FillInfoFields();
 

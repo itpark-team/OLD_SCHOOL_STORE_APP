@@ -11,6 +11,7 @@
         android:theme="@style/Theme.OLD_SCHOOL_STORE_APP">
         <activity
             android:name=".views.tutorial.TutorialActivity"
+            android:noHistory="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

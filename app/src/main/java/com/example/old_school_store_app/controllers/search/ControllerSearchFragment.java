@@ -53,6 +53,25 @@ public class ControllerSearchFragment
         }
     };
 
+    public void ChooseMethodShowProducts()
+    {
+        if(DataStorage.ExistKey("searchText")==true)
+        {
+            String searchText = (String) DataStorage.Get("searchText");
+            DataStorage.Delete("searchText");
+
+            EditText editTextProductName = view.findViewById(R.id.editTextProductNameSearch);
+
+            editTextProductName.setText(searchText);
+
+            SearchMethod();
+        }
+        else
+        {
+            ShowAllProducts();
+        }
+    }
+
     public void ShowAllProducts()
     {
         ArrayList<Product> allProducts = db.GetTableProducts().GetAll();
@@ -73,7 +92,7 @@ public class ControllerSearchFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewSearch.setLayoutManager(glm);
 
-        RvAdapterProducts adapter = new RvAdapterProducts(allProducts);
+        RvAdapterSearchProducts adapter = new RvAdapterSearchProducts(allProducts);
         recyclerViewSearch.setAdapter(adapter);
     }
 
@@ -82,6 +101,8 @@ public class ControllerSearchFragment
         EditText editTextProductName = view.findViewById(R.id.editTextProductNameSearch);
         editTextProductName.setText("");
 
+        DataStorage.Delete("searchText");
+
         ShowAllProducts();
     }
 
@@ -89,6 +110,8 @@ public class ControllerSearchFragment
     {
         EditText editTextProductName = view.findViewById(R.id.editTextProductNameSearch);
         String partOfName = editTextProductName.getText().toString();
+
+        DataStorage.Add("searchText",partOfName);
 
         ArrayList<Product> foundedProducts = db.GetTableProducts().GetByPartOfName(partOfName);
 
@@ -108,7 +131,7 @@ public class ControllerSearchFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewSearch.setLayoutManager(glm);
 
-        RvAdapterProducts adapter = new RvAdapterProducts(foundedProducts);
+        RvAdapterSearchProducts adapter = new RvAdapterSearchProducts(foundedProducts);
         recyclerViewSearch.setAdapter(adapter);
     }
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.old_school_store_app.R;
-import com.example.old_school_store_app.controllers.search.RvAdapterProducts;
+import com.example.old_school_store_app.controllers.search.RvAdapterSearchProducts;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Product;
@@ -55,7 +55,7 @@ public class ControllerCatalogItemsFragment
         GridLayoutManager glm = new GridLayoutManager(context,2);
         recyclerViewCategoryItems.setLayoutManager(glm);
 
-        RvAdapterProducts adapter = new RvAdapterProducts(foundedProducts);
+        RvAdapterCatalogItemProducts adapter = new RvAdapterCatalogItemProducts(foundedProducts);
         recyclerViewCategoryItems.setAdapter(adapter);
 
     }

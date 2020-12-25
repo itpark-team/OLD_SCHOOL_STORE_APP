@@ -1,5 +1,6 @@
 package com.example.old_school_store_app.controllers.tutorial;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ViewFlipper;
+
+import androidx.core.app.ActivityCompat;
 
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.views.main.MainActivity;
@@ -103,7 +106,9 @@ public class ControllerTutorialActivity
     private void OpenMainActivity()
     {
         Intent intent = new Intent(tutorialActivity.getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         tutorialActivity.startActivity(intent);
+        ActivityCompat.finishAffinity(tutorialActivity);
     }
 
 }
