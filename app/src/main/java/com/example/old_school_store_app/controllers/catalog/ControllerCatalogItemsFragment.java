@@ -34,7 +34,7 @@ public class ControllerCatalogItemsFragment
     public void ShowProductsByCategory()
     {
         int categoryId = (int)DataStorage.Get("categoryId");
-        DataStorage.Delete("categoryId");
+        //DataStorage.Delete("categoryId");
 
         ArrayList<Product> foundedProducts = db.GetTableProducts().GetByCategoryId(categoryId);
 
@@ -76,6 +76,8 @@ public class ControllerCatalogItemsFragment
 
     private void GoToBackMethod()
     {
+        DataStorage.Delete("categoryId");
+
         CatalogFragment catalogFragment = new CatalogFragment();
 
         MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");

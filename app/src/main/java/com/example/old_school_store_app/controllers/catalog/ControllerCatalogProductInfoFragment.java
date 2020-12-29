@@ -1,4 +1,4 @@
-package com.example.old_school_store_app.controllers.search;
+package com.example.old_school_store_app.controllers.catalog;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -15,54 +15,55 @@ import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.entities.ProductPicture;
+import com.example.old_school_store_app.views.catalog.CatalogItemsFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.search.SearchFragment;
 
 import java.util.ArrayList;
 
-public class ControllerSearchProductInfoFragment
+public class ControllerCatalogProductInfoFragment
 {
     private View view;
     private DbManager db;
     private ViewFlipper viewFlipperImages;
     private float fromPosition, toPosition;
 
-    public ControllerSearchProductInfoFragment(View view)
+    public ControllerCatalogProductInfoFragment(View view)
     {
         this.view = view;
         Context context = (Context) DataStorage.Get("context");
         db = DbManager.GetInstance(context);
 
-        viewFlipperImages = view.findViewById(R.id.viewFlipperSearchImages);
+        viewFlipperImages = view.findViewById(R.id.viewFlipperCatalogImages);
         viewFlipperImages.setOnTouchListener(viewFlipperImagesOnTouch);
     }
 
     public void InitializeButtonsClick()
     {
-        Button buttonGoBackToSearch = view.findViewById(R.id.buttonGoBackToSearch);
-        buttonGoBackToSearch.setOnClickListener(buttonGoBackToSearchOnClick);
+        Button buttonGoBackToCatalogItems = view.findViewById(R.id.buttonGoBackToCatalogItems);
+        buttonGoBackToCatalogItems.setOnClickListener(buttonGoBackToCatalogItemsOnClick);
 
-        Button buttonAddToCart = view.findViewById(R.id.buttonSearchAddToCart);
+        Button buttonAddToCart = view.findViewById(R.id.buttonCatalogAddToCart);
         buttonAddToCart.setOnClickListener(null);
     }
 
-    private View.OnClickListener buttonGoBackToSearchOnClick = new View.OnClickListener()  {
+    private View.OnClickListener buttonGoBackToCatalogItemsOnClick = new View.OnClickListener()  {
         @Override
         public void onClick(View view)
         {
-            GoBackToSearchFragment();
+            GoBackToCatalogItemsFragment();
         }
     };
 
-    private void GoBackToSearchFragment()
+    private void GoBackToCatalogItemsFragment()
     {
-        SearchFragment searchFragment = new SearchFragment();
+        CatalogItemsFragment catalogItemsFragment = new CatalogItemsFragment();
 
         MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentsContainerMain, searchFragment);
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogItemsFragment);
         fragmentTransaction.commit();
     }
 
@@ -86,12 +87,12 @@ public class ControllerSearchProductInfoFragment
             productPicture.setPictureId(pictureId);
         }
 
-        TextView textViewProductName = view.findViewById(R.id.textViewSearchProductName);
-        TextView textViewProductPrice = view.findViewById(R.id.textViewSearchProductPrice);
-        TextView textViewProductCountPurchases = view.findViewById(R.id.textViewSearchProductCountPurchases);
-        TextView textViewProductCountLeft = view.findViewById(R.id.textViewSearchProductCountLeft);
-        TextView textViewProductCategoryName = view.findViewById(R.id.textViewSearchProductCategoryName);
-        TextView textViewProductDescription = view.findViewById(R.id.textViewSearchProductDescription);
+        TextView textViewProductName = view.findViewById(R.id.textViewCatalogProductName);
+        TextView textViewProductPrice = view.findViewById(R.id.textViewCatalogProductPrice);
+        TextView textViewProductCountPurchases = view.findViewById(R.id.textViewCatalogProductCountPurchases);
+        TextView textViewProductCountLeft = view.findViewById(R.id.textViewCatalogProductCountLeft);
+        TextView textViewProductCategoryName = view.findViewById(R.id.textViewCatalogProductCategoryName);
+        TextView textViewProductDescription = view.findViewById(R.id.textViewCatalogProductDescription);
         
         textViewProductName.setText(product.getName());
         textViewProductPrice.setText("Цена: "+product.getPrice()+" руб.");

@@ -16,55 +16,55 @@
             android:text="Назад к поиску" />
 
         <ViewFlipper
-            android:id="@+id/viewFlipperImages"
+            android:id="@+id/viewFlipperSearchImages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </ViewFlipper>
 
         <TextView
-            android:id="@+id/textViewProductName"
+            android:id="@+id/textViewSearchProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textViewProductPrice"
+            android:id="@+id/textViewSearchProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textViewProductCountPurchases"
+            android:id="@+id/textViewSearchProductCountPurchases"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textViewProductCountLeft"
+            android:id="@+id/textViewSearchProductCountLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textViewProductCategoryName"
+            android:id="@+id/textViewSearchProductCategoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/buttonAddToCart"
+            android:id="@+id/buttonSearchAddToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Добавить в корзину" />
 
         <TextView
-            android:id="@+id/textViewProductDescription"
+            android:id="@+id/textViewSearchProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"

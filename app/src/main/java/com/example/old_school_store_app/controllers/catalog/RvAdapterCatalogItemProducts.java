@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.entities.Product;
+import com.example.old_school_store_app.views.catalog.CatalogProductInfoFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.search.SearchProductInfoFragment;
 
@@ -70,16 +71,16 @@ public class RvAdapterCatalogItemProducts extends RecyclerView.Adapter<RvAdapter
             @Override
             public void onClick(View view)
             {
-                /*DataStorage.Add("productId",products.get(i).getId());
+                DataStorage.Add("productId",products.get(i).getId());
 
-                SearchProductInfoFragment productInfoFragment = new SearchProductInfoFragment();
+                CatalogProductInfoFragment productInfoFragment = new CatalogProductInfoFragment();
 
                 MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
                 FragmentTransaction fragmentTransaction;
                 fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentsContainerMain, productInfoFragment);
-                fragmentTransaction.commit();*/
+                fragmentTransaction.commit();
             }
         });
 
