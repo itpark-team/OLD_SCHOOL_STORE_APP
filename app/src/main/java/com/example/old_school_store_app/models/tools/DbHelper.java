@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app.db",null,1);
+        super(context,"app10.db",null,1);
     }
 
     @Override
@@ -40,9 +40,21 @@ public class DbHelper extends SQLiteOpenHelper
                 "\tPRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ");");
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"users\" (\n" +
+                "    \"id\"    INTEGER NOT NULL,\n" +
+                "    \"login\"    TEXT NOT NULL,\n" +
+                "    \"password\"    TEXT NOT NULL,\n" +
+                "    \"name\"    TEXT NOT NULL,\n" +
+                "    \"bdate\"    INTEGER NOT NULL,\n" +
+                "    \"phone\"    TEXT NOT NULL,\n" +
+                "    \"email\"    TEXT NOT NULL,\n" +
+                "    PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                ");");
+
         db.execSQL("DELETE FROM categories");
         db.execSQL("DELETE FROM products");
         db.execSQL("DELETE FROM products_pictures");
+        db.execSQL("DELETE FROM users");
 
         db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"description\",\"picture_path\") VALUES (1,'Консоли','лёгкое, компактное, портативное электронное устройство, предназначенное для того, чтобы играть в видеоигры.','category_console'),\n" +
                 " (2,'Диски','Игра, которая предназначена для игр на типа игровой консоли.','category_cds'),\n" +
@@ -99,6 +111,10 @@ public class DbHelper extends SQLiteOpenHelper
                 " (31,15,'sonicg1'),\n" +
                 " (32,15,'sonicg2'),\n" +
                 " (33,15,'sonicg3');");
+
+        db.execSQL("INSERT INTO \"users\" (\"id\",\"login\",\"password\",\"name\",\"bdate\",\"phone\",\"email\") VALUES (1,'vik','123','Виктор',742710058,'8923732342','vik@mail.ru'),\n" +
+                " (2,'shiki','342','Михаил',890198458,'8956732843','shik@yandex.ru'),\n" +
+                " (3,'jopa','76378','Дмитрий',634368058,'8963742734','jojpa@mail.ru');");
 
     }
 

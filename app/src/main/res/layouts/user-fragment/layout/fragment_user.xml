@@ -8,6 +8,21 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="USER FRAGMENT"
+        android:text="Пожалуйста зарегистрируйтесь или войдите"
+        android:textAlignment="center"
         android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/buttonUserRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Зарегистрироваться" />
+
+    <Button
+        android:id="@+id/buttonUserEnter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Войти" />
 </LinearLayout>

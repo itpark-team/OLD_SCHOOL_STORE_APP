@@ -51,7 +51,7 @@ public class TableProductsPictures
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products_pictures WHERE product_id="+productId+" LIMIT 1";
+        String sqlCommand = "SELECT * FROM `products_pictures` WHERE product_id="+productId+" LIMIT 1";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
@@ -76,7 +76,7 @@ public class TableProductsPictures
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products_pictures WHERE product_id="+productId;
+        String sqlCommand = "SELECT * FROM `products_pictures` WHERE product_id="+productId;
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 

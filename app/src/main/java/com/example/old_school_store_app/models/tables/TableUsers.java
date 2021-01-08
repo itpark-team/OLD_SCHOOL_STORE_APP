@@ -17,19 +17,19 @@ public class TableUsers
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<User> getAll()
+    public User GetByLoginAndPassword(String login, String password)
     {
-        ArrayList<User> users = new ArrayList<>();
+        User user = null;
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM `TableUser`";
+        String sqlCommand = "SELECT * FROM `users` WHERE login='"+login+"' AND password='"+password+"'";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
         while (cursor.moveToNext() == true)
         {
-            User user = new User(
+             user = new User(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -38,13 +38,20 @@ public class TableUsers
                     cursor.getString(5),
                     cursor.getString(6)
             );
-
-            users.add(user);
         }
 
         cursor.close();
         dbHelper.close();
 
-        return users;
+        return user;
+    }
+
+    public void InsertNewUser(User user)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "INSERT INTO `users` (login,password,name,bdate,phone,email) VALUES('"+user.getLogin()+"','"+user.getPassword()+"','"+user.getName()+"',"+user.getbDate()+",'"+user.getPhone()+"','"+user.getEmail()+"')";
+
+        db.execSQL(sqlCommand);
     }
 }

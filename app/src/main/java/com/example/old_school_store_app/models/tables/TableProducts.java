@@ -24,7 +24,7 @@ public class TableProducts
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products";
+        String sqlCommand = "SELECT * FROM `products`";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
@@ -55,7 +55,7 @@ public class TableProducts
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products WHERE name like '%"+partOfName+"%'";
+        String sqlCommand = "SELECT * FROM `products` WHERE name like '%"+partOfName+"%'";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
@@ -86,7 +86,7 @@ public class TableProducts
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products WHERE category_id="+categoryId;
+        String sqlCommand = "SELECT * FROM `products` WHERE category_id="+categoryId;
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
@@ -117,7 +117,7 @@ public class TableProducts
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM products WHERE id="+productId;
+        String sqlCommand = "SELECT * FROM `products` WHERE id="+productId;
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
