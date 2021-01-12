@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app10.db",null,1);
+        super(context,"app12.db",null,1);
     }
 
     @Override
@@ -48,6 +48,13 @@ public class DbHelper extends SQLiteOpenHelper
                 "    \"bdate\"    INTEGER NOT NULL,\n" +
                 "    \"phone\"    TEXT NOT NULL,\n" +
                 "    \"email\"    TEXT NOT NULL,\n" +
+                "    PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                ");");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"settings_app\" (\n" +
+                "    \"id\"    INTEGER NOT NULL,\n" +
+                "    \"key_field\"    TEXT NOT NULL,\n" +
+                "    \"value_field\"    TEXT NOT NULL,\n" +
                 "    PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ");");
 
