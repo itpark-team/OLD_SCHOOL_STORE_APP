@@ -10,6 +10,8 @@ import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.views.catalog.CatalogFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
+import com.example.old_school_store_app.views.user.AuthUserFragment;
+import com.example.old_school_store_app.views.user.RegisterUserFragment;
 
 public class ControllerUserFragment
 {
@@ -47,16 +49,23 @@ public class ControllerUserFragment
     {
         MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
-        CatalogFragment catalogFragment = new CatalogFragment();
+        AuthUserFragment authUserFragment = new AuthUserFragment();
 
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogFragment);
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, authUserFragment);
         fragmentTransaction.commit();
     }
 
     private void GoToRegister()
     {
+        MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
+        RegisterUserFragment registerUserFragment = new RegisterUserFragment();
+
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, registerUserFragment);
+        fragmentTransaction.commit();
     }
 }
