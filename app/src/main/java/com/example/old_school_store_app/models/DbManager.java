@@ -8,6 +8,7 @@ import com.example.old_school_store_app.models.tables.TableOrders;
 import com.example.old_school_store_app.models.tables.TableOrdersProducts;
 import com.example.old_school_store_app.models.tables.TableProducts;
 import com.example.old_school_store_app.models.tables.TableProductsPictures;
+import com.example.old_school_store_app.models.tables.TableSettingsApp;
 import com.example.old_school_store_app.models.tables.TableUsers;
 import com.example.old_school_store_app.models.tools.DbHelper;
 
@@ -31,7 +32,7 @@ public class DbManager
     private TableProducts tableProducts;
     private TableProductsPictures tableProductsPictures;
     private TableUsers tableUsers;
-
+    private TableSettingsApp tableSettingsApp;
 
     private DbManager(Context context)
     {
@@ -44,7 +45,7 @@ public class DbManager
         tableProducts = new TableProducts(dbHelper);
         tableProductsPictures = new TableProductsPictures(dbHelper);
         tableUsers = new TableUsers(dbHelper);
-
+        tableSettingsApp = new TableSettingsApp(dbHelper);
     }
 
     public TableCart GetTableCartItem() {
@@ -75,4 +76,7 @@ public class DbManager
         return tableUsers;
     }
 
+    public TableSettingsApp GetTableSettingsApp() {
+        return tableSettingsApp;
+    }
 }

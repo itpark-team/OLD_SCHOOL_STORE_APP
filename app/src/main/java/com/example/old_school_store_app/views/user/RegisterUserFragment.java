@@ -18,6 +18,7 @@ public class RegisterUserFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_register_user, container, false);
 
         ControllerRegisterUserFragment controller = new ControllerRegisterUserFragment(view);
+        controller.InitializeButtonsClick();
 
         return view;
     }

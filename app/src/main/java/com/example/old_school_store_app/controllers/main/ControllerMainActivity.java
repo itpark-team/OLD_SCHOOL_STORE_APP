@@ -12,14 +12,14 @@ import com.example.old_school_store_app.views.catalog.CatalogFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.map.MapFragment;
 import com.example.old_school_store_app.views.search.SearchFragment;
-import com.example.old_school_store_app.views.user.UserFragment;
+import com.example.old_school_store_app.views.user.InitialUserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ControllerMainActivity
 {
     private MainActivity mainActivity;
 
-    private UserFragment userFragment;
+    private InitialUserFragment initialUserFragment;
     private SearchFragment searchFragment;
     private CatalogFragment catalogFragment;
     private MapFragment mapFragment;
@@ -40,7 +40,7 @@ public class ControllerMainActivity
 
     public void InitializeFragments()
     {
-        userFragment = new UserFragment();
+        initialUserFragment = new InitialUserFragment();
         searchFragment = new SearchFragment();
         catalogFragment = new CatalogFragment();
         mapFragment = new MapFragment();
@@ -48,7 +48,7 @@ public class ControllerMainActivity
 
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentsContainerMain, userFragment);
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
         fragmentTransaction.commit();
     }
 
@@ -68,7 +68,7 @@ public class ControllerMainActivity
             switch (item.getItemId())
             {
                 case R.id.actionUser:
-                    fragmentTransaction.replace(R.id.fragmentsContainerMain, userFragment);
+                    fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
                     break;
                 case R.id.actionSearch:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, searchFragment);

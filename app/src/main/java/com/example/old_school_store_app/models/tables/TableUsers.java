@@ -46,6 +46,22 @@ public class TableUsers
         return user;
     }
 
+    public boolean ExistUserByLogin(String login)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM `users` WHERE login='"+login+"'";
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        boolean exist = cursor.moveToNext();
+
+        cursor.close();
+        dbHelper.close();
+
+        return exist;
+    }
+
     public void InsertNewUser(User user)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();

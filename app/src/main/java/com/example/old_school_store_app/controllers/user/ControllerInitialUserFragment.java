@@ -13,11 +13,11 @@ import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.AuthUserFragment;
 import com.example.old_school_store_app.views.user.RegisterUserFragment;
 
-public class ControllerUserFragment
+public class ControllerInitialUserFragment
 {
     private View view;
 
-    public ControllerUserFragment(View view)
+    public ControllerInitialUserFragment(View view)
     {
         this.view = view;
     }

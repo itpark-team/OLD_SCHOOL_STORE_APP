@@ -15,7 +15,7 @@ public class DataStorage {
     }
 
     public static Object Get(String key){
-        return  dictionary.get(key);
+        return dictionary.get(key);
     }
 
     public static boolean ExistKey(String key)
