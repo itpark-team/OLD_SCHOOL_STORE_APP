@@ -19,7 +19,7 @@ public class TableSettingsApp
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String sqlCommand = "INSERT INTO `settings_app`(key_field, value_field) VALUES('"+key+"','"+value+"')";
-        db.rawQuery(sqlCommand,null);
+        db.execSQL(sqlCommand);
 
         dbHelper.close();
     }
@@ -29,7 +29,7 @@ public class TableSettingsApp
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String sqlCommand = "DELETE FROM `settings_app` WHERE key_field='"+key+"'";
-        db.rawQuery(sqlCommand,null);
+        db.execSQL(sqlCommand);
 
         dbHelper.close();
     }
@@ -41,7 +41,7 @@ public class TableSettingsApp
         String sqlCommand = "SELECT * FROM `settings_app` WHERE key_field='"+key+"'";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
-        cursor.moveToNext();
+        boolean result = cursor.moveToNext();
 
         String value = cursor.getString(2);
 

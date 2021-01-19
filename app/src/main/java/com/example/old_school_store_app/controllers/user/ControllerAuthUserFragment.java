@@ -28,11 +28,11 @@ public class ControllerAuthUserFragment
 
     public void InitializeButtonsClick()
     {
-        Button buttonAuthUserEnter = view.findViewById(R.id.buttonUserEnter);
+        Button buttonAuthUserEnter = view.findViewById(R.id.buttonAuthUserEnter);
         buttonAuthUserEnter.setOnClickListener(OnButtonAuthUserEnterClickListener);
     }
 
-    View.OnClickListener OnButtonAuthUserEnterClickListener = new View.OnClickListener()
+    private View.OnClickListener OnButtonAuthUserEnterClickListener = new View.OnClickListener()
     {
         @Override
         public void onClick(View view)

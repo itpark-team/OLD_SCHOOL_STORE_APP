@@ -34,16 +34,16 @@ public class ControllerTutorialActivity
 
     public void CheckShowTutorial()
     {
-        db.GetTableSettingsApp().Add("showTutorial","0");
+        //db.GetTableSettingsApp().Add("showTutorial","0");
 
-        /*String valueField = db.GetTableSettingsApp().Get("showTutorial");
+        String valueField = db.GetTableSettingsApp().Get("showTutorial");
 
         int show = Integer.parseInt(valueField);
 
         if(show==0)
         {
             OpenMainActivity();
-        }*/
+        }
     }
 
 

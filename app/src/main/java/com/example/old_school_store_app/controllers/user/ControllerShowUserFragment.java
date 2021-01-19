@@ -3,6 +3,7 @@ package com.example.old_school_store_app.controllers.user;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.database.Cursor;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,16 +15,15 @@ import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.InitialUserFragment;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class ControllerShowUserFragment
 {
     private View view;
     private DbManager db;
 
-    private TextView textViewShowUserLogin = view.findViewById(R.id.textViewShowUserLogin);
-    private TextView textViewShowUserName = view.findViewById(R.id.textViewShowUserName);
-    private TextView textViewShowUserBdate = view.findViewById(R.id.textViewShowUserBdate);
-    private TextView textViewShowUserPhone = view.findViewById(R.id.textViewShowUserPhone);
-    private TextView textViewShowUserEmail = view.findViewById(R.id.textViewShowUserEmail);
+
 
     public ControllerShowUserFragment(View view)
     {
@@ -34,10 +34,25 @@ public class ControllerShowUserFragment
 
     public void ShowUserFields()
     {
+        TextView textViewShowUserLogin = view.findViewById(R.id.textViewShowUserLogin);
+        TextView textViewShowUserName = view.findViewById(R.id.textViewShowUserName);
+        TextView textViewShowUserBdate = view.findViewById(R.id.textViewShowUserBdate);
+        TextView textViewShowUserPhone = view.findViewById(R.id.textViewShowUserPhone);
+        TextView textViewShowUserEmail = view.findViewById(R.id.textViewShowUserEmail);
+
         User user = (User)DataStorage.Get("authorizedUser");
+
+
         textViewShowUserLogin.setText(user.getLogin());
         textViewShowUserName.setText(user.getName());
-        textViewShowUserBdate.setText(user.getbDate());
+
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(user.getbDate() * 1000L);
+        String bDate = DateFormat.format("dd-MM-yyyy", cal).toString();
+
+        textViewShowUserBdate.setText(bDate);
+
+
         textViewShowUserPhone.setText(user.getPhone());
         textViewShowUserEmail.setText(user.getEmail());
     }
