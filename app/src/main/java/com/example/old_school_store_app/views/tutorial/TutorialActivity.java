@@ -24,6 +24,7 @@ public class TutorialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tutorial);
 
         ControllerTutorialActivity controller = new ControllerTutorialActivity(this);
+        controller.CheckShowTutorial();
         controller.InitializeViewFlipper();
         controller.InitializeButtonsClick();
     }

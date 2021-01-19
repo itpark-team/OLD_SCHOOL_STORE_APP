@@ -20,11 +20,8 @@ public class ShowUserFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.fragment_show_user, container, false);
 
-        User user = (User)DataStorage.Get("user");
-        TextView textView13 = view.findViewById(R.id.textView13);
-        textView13.setText(user.getName() + " "+user.getId());
-
         ControllerShowUserFragment controller = new ControllerShowUserFragment(view);
+        controller.ShowUserFields();
         controller.InitializeButtonsClick();
 
         return view;

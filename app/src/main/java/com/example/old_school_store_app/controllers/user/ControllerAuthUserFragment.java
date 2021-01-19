@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
+import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.ShowUserFragment;
 
@@ -17,9 +18,6 @@ public class ControllerAuthUserFragment
 {
     private View view;
     private DbManager db;
-
-    private EditText editTextAuthUserLogin = view.findViewById(R.id.editTextAuthUserLogin);
-    private EditText editTextAuthUserPassword = view.findViewById(R.id.editTextAuthUserPassword);
 
     public ControllerAuthUserFragment(View view)
     {
@@ -39,28 +37,41 @@ public class ControllerAuthUserFragment
         @Override
         public void onClick(View view)
         {
-            String login = editTextAuthUserLogin.getText().toString();
-            String password = editTextAuthUserPassword.getText().toString();
-
-            Context context = (Context) DataStorage.Get("context");
-
-            if(db.GetTableUsers().GetByLoginAndPassword(login, password)!=null)
-            {
-                DataStorage.Add("authorizedUser", editTextAuthUserLogin.getText().toString());
-
-                ShowUserFragment showUserFragment = new ShowUserFragment();
-
-                MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
-
-                FragmentTransaction fragmentTransaction;
-                fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentsContainerMain, showUserFragment);
-                fragmentTransaction.commit();
-            }
-            else
-            {
-                Toast.makeText(context,"Неверный Логин", Toast.LENGTH_SHORT).show();
-            }
+            AuthorizeUser();
         }
     };
+
+    private void AuthorizeUser()
+    {
+        EditText editTextAuthUserLogin = view.findViewById(R.id.editTextAuthUserLogin);
+        EditText editTextAuthUserPassword = view.findViewById(R.id.editTextAuthUserPassword);
+
+        String login = editTextAuthUserLogin.getText().toString();
+        String password = editTextAuthUserPassword.getText().toString();
+
+        Context context = (Context) DataStorage.Get("context");
+
+        User user = db.GetTableUsers().GetByLoginAndPassword(login, password);
+
+        if(user != null)
+        {
+            DataStorage.Add("authorizedUser", user);
+            db.GetTableSettingsApp().Add("authorizedUser", Integer.toString(user.getId()));
+
+            ShowUserFragment showUserFragment = new ShowUserFragment();
+
+            MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentsContainerMain, showUserFragment);
+            fragmentTransaction.commit();
+        }
+        else
+        {
+            Toast.makeText(context,"Неверный Логин или Пароль", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

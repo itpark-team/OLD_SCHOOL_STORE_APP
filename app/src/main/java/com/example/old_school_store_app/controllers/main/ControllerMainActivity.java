@@ -7,18 +7,24 @@ import androidx.annotation.NonNull;
 
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
+import com.example.old_school_store_app.models.DbManager;
+import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.cart.CartFragment;
 import com.example.old_school_store_app.views.catalog.CatalogFragment;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.map.MapFragment;
 import com.example.old_school_store_app.views.search.SearchFragment;
 import com.example.old_school_store_app.views.user.InitialUserFragment;
+import com.example.old_school_store_app.views.user.ShowUserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ControllerMainActivity
 {
     private MainActivity mainActivity;
 
+    private DbManager db;
+
+    private ShowUserFragment showUserFragment;
     private InitialUserFragment initialUserFragment;
     private SearchFragment searchFragment;
     private CatalogFragment catalogFragment;
@@ -30,7 +36,11 @@ public class ControllerMainActivity
     public ControllerMainActivity(MainActivity mainActivity)
     {
         this.mainActivity = mainActivity;
+
+        db = DbManager.GetInstance(this.mainActivity.getApplicationContext());
     }
+
+
 
     public void SaveApplicationGlobalVariables()
     {
@@ -38,9 +48,25 @@ public class ControllerMainActivity
         DataStorage.Add("mainActivity", mainActivity);
     }
 
+    public void CheckAuthorizedUser()
+    {
+        if(db.GetTableSettingsApp().ExistKey("authorizedUser")==true)
+        {
+            String valueField = db.GetTableSettingsApp().Get("authorizedUser");
+
+            int idUser = Integer.parseInt(valueField);
+
+            User user = db.GetTableUsers().GetById(idUser);
+
+            DataStorage.Add("authorizedUser", user);
+        }
+    }
+
     public void InitializeFragments()
     {
         initialUserFragment = new InitialUserFragment();
+        showUserFragment = new ShowUserFragment();
+
         searchFragment = new SearchFragment();
         catalogFragment = new CatalogFragment();
         mapFragment = new MapFragment();
@@ -48,7 +74,17 @@ public class ControllerMainActivity
 
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
+
+        if(DataStorage.ExistKey("authorizedUser")==true)
+        {
+            fragmentTransaction.replace(R.id.fragmentsContainerMain, showUserFragment);
+        }
+        else
+        {
+            fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
+        }
+
+
         fragmentTransaction.commit();
     }
 
@@ -68,7 +104,14 @@ public class ControllerMainActivity
             switch (item.getItemId())
             {
                 case R.id.actionUser:
-                    fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
+                    if(DataStorage.ExistKey("authorizedUser")==true)
+                    {
+                        fragmentTransaction.replace(R.id.fragmentsContainerMain, showUserFragment);
+                    }
+                    else
+                    {
+                        fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
+                    }
                     break;
                 case R.id.actionSearch:
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, searchFragment);

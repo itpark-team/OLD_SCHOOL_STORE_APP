@@ -30,7 +30,11 @@ public class ControllerShowUserFragment
         this.view = view;
         Context context = (Context) DataStorage.Get("context");
         db = DbManager.GetInstance(context);
-        User user = db.GetTableUsers().GetById(0);
+    }
+
+    public void ShowUserFields()
+    {
+        User user = (User)DataStorage.Get("authorizedUser");
         textViewShowUserLogin.setText(user.getLogin());
         textViewShowUserName.setText(user.getName());
         textViewShowUserBdate.setText(user.getbDate());
@@ -49,6 +53,7 @@ public class ControllerShowUserFragment
         public void onClick(View view)
         {
             DataStorage.Delete("authorizedUser");
+            db.GetTableSettingsApp().Delete("authorizedUser");
 
             InitialUserFragment initialUserFragment = new InitialUserFragment();
 

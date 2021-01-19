@@ -13,6 +13,7 @@ import android.widget.ViewFlipper;
 import androidx.core.app.ActivityCompat;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.tutorial.TutorialActivity;
 
@@ -23,10 +24,28 @@ public class ControllerTutorialActivity
     private ViewFlipper viewFlipperPages;
     private int indexCurPage, countPages;
 
+    private DbManager db;
+
     public ControllerTutorialActivity(TutorialActivity tutorialActivity)
     {
         this.tutorialActivity = tutorialActivity;
+        db = DbManager.GetInstance(this.tutorialActivity.getApplicationContext());
     }
+
+    public void CheckShowTutorial()
+    {
+        db.GetTableSettingsApp().Add("showTutorial","0");
+
+        /*String valueField = db.GetTableSettingsApp().Get("showTutorial");
+
+        int show = Integer.parseInt(valueField);
+
+        if(show==0)
+        {
+            OpenMainActivity();
+        }*/
+    }
+
 
     public void InitializeViewFlipper()
     {

@@ -119,9 +119,9 @@ public class ControllerRegisterUserFragment
 
         User userFromDb = db.GetTableUsers().GetByLoginAndPassword(login, password);
 
-        db.GetTableSettingsApp().Add("user",Integer.toString(userFromDb.getId()));
+        db.GetTableSettingsApp().Add("authorizedUser",Integer.toString(userFromDb.getId()));
 
-        DataStorage.Add("user",userFromDb);
+        DataStorage.Add("authorizedUser",userFromDb);
 
         MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
 
