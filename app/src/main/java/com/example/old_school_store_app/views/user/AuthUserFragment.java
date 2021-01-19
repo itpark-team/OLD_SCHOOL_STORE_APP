@@ -17,6 +17,7 @@ public class AuthUserFragment extends Fragment
         View view = inflater.inflate(R.layout.frament_auth_user, container, false);
 
         ControllerAuthUserFragment controller = new ControllerAuthUserFragment(view);
+        controller.InitializeButtonsClick();
 
         return view;
     }

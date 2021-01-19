@@ -8,6 +8,84 @@
         android:id="@+id/textView13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SHOW USER"
-        android:textSize="30sp" />
+        android:text="Логин"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewShowUserLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Имя"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewShowUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Дата рождения"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewShowUserBdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Телефон"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewShowUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="E-mail"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textViewShowUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/buttonExitFromAcc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выйти из аккаунта" />
 </LinearLayout>

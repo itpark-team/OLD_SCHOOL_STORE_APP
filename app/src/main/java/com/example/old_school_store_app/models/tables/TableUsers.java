@@ -70,4 +70,33 @@ public class TableUsers
 
         db.execSQL(sqlCommand);
     }
+
+    public User GetById(int userId)
+    {
+        User user = null;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM `users` WHERE id="+userId;
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        if(cursor.moveToNext()==true)
+        {
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getString(5),
+                    cursor.getString(6)
+            );
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return user;
+    }
 }

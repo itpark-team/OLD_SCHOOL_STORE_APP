@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.controllers.user.ControllerShowUserFragment;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.entities.User;
 
@@ -22,6 +23,9 @@ public class ShowUserFragment extends Fragment
         User user = (User)DataStorage.Get("user");
         TextView textView13 = view.findViewById(R.id.textView13);
         textView13.setText(user.getName() + " "+user.getId());
+
+        ControllerShowUserFragment controller = new ControllerShowUserFragment(view);
+        controller.InitializeButtonsClick();
 
         return view;
     }
