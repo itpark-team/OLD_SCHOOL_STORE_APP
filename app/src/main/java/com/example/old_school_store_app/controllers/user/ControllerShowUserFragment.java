@@ -2,10 +2,11 @@ package com.example.old_school_store_app.controllers.user;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.database.Cursor;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.old_school_store_app.R;
@@ -61,6 +62,9 @@ public class ControllerShowUserFragment
     {
         Button buttonExitFromAcc = view.findViewById(R.id.buttonExitFromAcc);
         buttonExitFromAcc.setOnClickListener(OnButtonExitFromAccClickListener);
+
+        Switch switchShowTutorial = view.findViewById(R.id.switchShowTutorial);
+        switchShowTutorial.setOnCheckedChangeListener(OnSwitchShowTutorialChangeListener);
     }
 
     View.OnClickListener OnButtonExitFromAccClickListener = new View.OnClickListener() {
@@ -78,6 +82,22 @@ public class ControllerShowUserFragment
             fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
             fragmentTransaction.commit();
+        }
+    };
+
+
+    CompoundButton.OnCheckedChangeListener OnSwitchShowTutorialChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+        {
+            if (isChecked)
+            {
+                db.GetTableSettingsApp().Update("showTutorial", "1");
+            }
+            else
+            {
+                db.GetTableSettingsApp().Update("showTutorial", "0");
+            }
         }
     };
 }

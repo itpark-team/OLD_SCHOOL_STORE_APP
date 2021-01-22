@@ -88,4 +88,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Выйти из аккаунта" />
+
+    <Switch
+        android:id="@+id/switchShowTutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Показывать обучение" />
+
 </LinearLayout>

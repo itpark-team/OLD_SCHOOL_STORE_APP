@@ -34,8 +34,10 @@ public class ControllerTutorialActivity
 
     public void CheckShowTutorial()
     {
-        //db.GetTableSettingsApp().Add("showTutorial","0");
-
+        if(db.GetTableSettingsApp().ExistKey("showTutorial")==false)
+        {
+            db.GetTableSettingsApp().Add("showTutorial", "1");
+        }
         String valueField = db.GetTableSettingsApp().Get("showTutorial");
 
         int show = Integer.parseInt(valueField);

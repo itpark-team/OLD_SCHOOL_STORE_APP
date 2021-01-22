@@ -34,6 +34,16 @@ public class TableSettingsApp
         dbHelper.close();
     }
 
+    public void Update(String key, String value)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "UPDATE settings_app SET value_field='"+value+"' WHERE key_field='"+key+"'";
+        db.execSQL(sqlCommand);
+
+        dbHelper.close();
+    }
+
     public String Get(String key)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
