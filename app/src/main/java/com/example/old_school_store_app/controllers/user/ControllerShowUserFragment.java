@@ -64,6 +64,20 @@ public class ControllerShowUserFragment
         buttonExitFromAcc.setOnClickListener(OnButtonExitFromAccClickListener);
 
         Switch switchShowTutorial = view.findViewById(R.id.switchShowTutorial);
+
+        String valueField = db.GetTableSettingsApp().Get("showTutorial");
+
+        int show = Integer.parseInt(valueField);
+
+        if(show==0)
+        {
+            switchShowTutorial.setChecked(false);
+        }
+        else
+        {
+            switchShowTutorial.setChecked(true);
+        }
+
         switchShowTutorial.setOnCheckedChangeListener(OnSwitchShowTutorialChangeListener);
     }
 
