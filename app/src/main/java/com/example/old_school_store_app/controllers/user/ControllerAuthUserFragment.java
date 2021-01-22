@@ -12,6 +12,7 @@ import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
+import com.example.old_school_store_app.views.user.InitialUserFragment;
 import com.example.old_school_store_app.views.user.ShowUserFragment;
 
 public class ControllerAuthUserFragment
@@ -30,6 +31,9 @@ public class ControllerAuthUserFragment
     {
         Button buttonAuthUserEnter = view.findViewById(R.id.buttonAuthUserEnter);
         buttonAuthUserEnter.setOnClickListener(OnButtonAuthUserEnterClickListener);
+
+        Button buttonAuthUserBack = view.findViewById(R.id.buttonAuthUserBack);
+        buttonAuthUserBack.setOnClickListener(OnButtonAuthUserBackClickListener);
     }
 
     private View.OnClickListener OnButtonAuthUserEnterClickListener = new View.OnClickListener()
@@ -71,6 +75,25 @@ public class ControllerAuthUserFragment
         {
             Toast.makeText(context,"Неверный Логин или Пароль", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private View.OnClickListener OnButtonAuthUserBackClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GoToBack();
+        }
+    };
+
+    private void GoToBack()
+    {
+        InitialUserFragment initialUserFragment = new InitialUserFragment();
+
+        MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
+        fragmentTransaction.commit();
     }
 
 

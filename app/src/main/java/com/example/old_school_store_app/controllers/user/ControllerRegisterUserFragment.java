@@ -2,6 +2,7 @@ package com.example.old_school_store_app.controllers.user;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.AuthUserFragment;
+import com.example.old_school_store_app.views.user.InitialUserFragment;
 import com.example.old_school_store_app.views.user.ShowUserFragment;
 
 
@@ -36,6 +38,9 @@ public class ControllerRegisterUserFragment
     {
         Button buttonRegisterUserRegister = view.findViewById(R.id.buttonRegisterUserRegister);
         buttonRegisterUserRegister.setOnClickListener(OnButtonRegisterUserRegisterClickListener);
+
+        Button buttonRegisterUserBack = view.findViewById(R.id.buttonRegisterUserBack);
+        buttonRegisterUserBack.setOnClickListener(OnButtonRegisterUserBackClickListener);
     }
 
     private View.OnClickListener OnButtonRegisterUserRegisterClickListener = new View.OnClickListener() {
@@ -102,11 +107,12 @@ public class ControllerRegisterUserFragment
 
         int timestampBdate = 0;
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        bDate+=" 12:00:00";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         try
         {
             Date date = dateFormat.parse(bDate);
-            timestampBdate = (int)date.getTime();
+            timestampBdate = (int)(date.getTime()/1000);
         }
         catch (ParseException e)
         {
@@ -130,6 +136,25 @@ public class ControllerRegisterUserFragment
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentsContainerMain, showUserFragment);
+        fragmentTransaction.commit();
+    }
+
+    private View.OnClickListener OnButtonRegisterUserBackClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GoToBack();
+        }
+    };
+
+    private void GoToBack()
+    {
+        InitialUserFragment initialUserFragment = new InitialUserFragment();
+
+        MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentsContainerMain, initialUserFragment);
         fragmentTransaction.commit();
     }
 }
