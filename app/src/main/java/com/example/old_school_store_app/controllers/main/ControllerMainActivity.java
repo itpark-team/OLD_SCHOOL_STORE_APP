@@ -69,7 +69,7 @@ public class ControllerMainActivity
 
         searchFragment = new SearchFragment();
         catalogFragment = new CatalogFragment();
-        mapFragment = new MapFragment();
+
         cartFragment = new CartFragment();
 
         FragmentTransaction fragmentTransaction;
@@ -120,6 +120,7 @@ public class ControllerMainActivity
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, catalogFragment);
                     break;
                 case R.id.actionMap:
+                    mapFragment = new MapFragment();
                     fragmentTransaction.replace(R.id.fragmentsContainerMain, mapFragment);
                     break;
                 case R.id.actionCart:
