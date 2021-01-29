@@ -10,6 +10,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+        <Button
+            android:id="@+id/buttonRegisterUserBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Назад" />
+
         <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
@@ -105,12 +111,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Зарегистрироваться" />
-
-        <Button
-            android:id="@+id/buttonRegisterUserBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Назад" />
 
     </LinearLayout>
 
