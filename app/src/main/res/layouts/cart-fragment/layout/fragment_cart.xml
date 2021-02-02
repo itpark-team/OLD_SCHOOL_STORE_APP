@@ -14,7 +14,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCartList"
         android:layout_width="match_parent"
-        android:layout_height="476dp">
+        android:layout_height="385dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -37,5 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Оформить заказ" />
+
+    <Button
+        android:id="@+id/buttonCartResetOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сбросить заказ" />
 
 </LinearLayout>

@@ -25,7 +25,7 @@ public class DbManager
         return instance;
     }
 
-    private TableCart tableCartItem;
+    private TableCart tableCart;
     private TableCategories tableCategories;
     private TableOrders tableOrders;
     private TableOrdersProducts tableOrdersProducts;
@@ -38,7 +38,7 @@ public class DbManager
     {
         DbHelper dbHelper = new DbHelper(context);
 
-        tableCartItem = new TableCart(dbHelper);
+        tableCart = new TableCart(dbHelper);
         tableCategories = new TableCategories(dbHelper);
         tableOrders = new TableOrders(dbHelper);
         tableOrdersProducts = new TableOrdersProducts(dbHelper);
@@ -48,8 +48,8 @@ public class DbManager
         tableSettingsApp = new TableSettingsApp(dbHelper);
     }
 
-    public TableCart GetTableCartItem() {
-        return tableCartItem;
+    public TableCart GetTableCart() {
+        return tableCart;
     }
 
     public TableCategories GetTableCategories() {

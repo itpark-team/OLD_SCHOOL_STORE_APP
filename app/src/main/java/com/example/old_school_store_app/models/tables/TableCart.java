@@ -17,13 +17,13 @@ public class TableCart
        this.dbHelper = dbHelper;
     }
 
-    public ArrayList<CartItem> getAll()
+    public ArrayList<CartItem> GetRecordsByUser(int userId)
     {
         ArrayList<CartItem> cartItems = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM `cart`";
+        String sqlCommand = "SELECT * FROM cart WHERE user_id="+userId;
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
@@ -42,5 +42,37 @@ public class TableCart
         dbHelper.close();
 
         return cartItems;
+    }
+
+    public void AddToCart(CartItem cartItem)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM cart WHERE user_id="+cartItem.getUserId()+" AND product_id="+cartItem.getProductId();
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+        boolean exist = cursor.moveToNext();
+
+        cursor.close();
+
+        if(exist) // сделать проверку на наличие предмета в списке
+        {
+            db.execSQL("UPDATE cart SET count_product=count_product+"+cartItem.getCountProducts()+" WHERE user_id="+cartItem.getUserId()+" AND product_id="+cartItem.getProductId());
+            //Сделать нормальное добавление к существующему
+        }
+        else
+        {
+            db.execSQL("INSERT INTO cart(user_id, product_id, count_product) VALUES("+cartItem.getUserId()+","+cartItem.getProductId()+","+cartItem.getCountProducts()+")");
+        }
+        dbHelper.close();
+    }
+
+    public void ClearCartByUser(int userId)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.execSQL("DELETE FROM cart WHERE user_id="+userId);
+
+        dbHelper.close();
     }
 }

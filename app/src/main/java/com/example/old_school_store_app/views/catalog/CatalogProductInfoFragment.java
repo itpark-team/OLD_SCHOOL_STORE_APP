@@ -18,6 +18,7 @@ public class CatalogProductInfoFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_catalog_product_info, container, false);
 
         ControllerCatalogProductInfoFragment controller = new ControllerCatalogProductInfoFragment(view);
+        controller.InitializeViewFlipper();
         controller.InitializeButtonsClick();
         controller.FillInfoFields();
 
