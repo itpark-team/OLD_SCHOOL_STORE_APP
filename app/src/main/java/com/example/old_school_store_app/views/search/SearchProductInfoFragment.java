@@ -17,6 +17,7 @@ public class SearchProductInfoFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_search_product_info, container, false);
 
         ControllerSearchProductInfoFragment controller = new ControllerSearchProductInfoFragment(view);
+        controller.InitializeViewFlipper();
         controller.InitializeButtonsClick();
         controller.FillInfoFields();
 

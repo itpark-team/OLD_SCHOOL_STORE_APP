@@ -1,20 +1,26 @@
 package com.example.old_school_store_app.controllers.search;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
+import com.example.old_school_store_app.models.entities.CartItem;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.entities.ProductPicture;
+import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.search.SearchFragment;
 
@@ -26,6 +32,9 @@ public class ControllerSearchProductInfoFragment
     private DbManager db;
     private ViewFlipper viewFlipperImages;
     private float fromPosition, toPosition;
+    private Product product;
+    private int counter;
+    private User user;
 
     public ControllerSearchProductInfoFragment(View view)
     {
@@ -33,6 +42,23 @@ public class ControllerSearchProductInfoFragment
         Context context = (Context) DataStorage.Get("context");
         db = DbManager.GetInstance(context);
 
+        int productId = (int)DataStorage.Get("productId");
+        DataStorage.Delete("productId");
+
+        product = db.GetTableProducts().GetById(productId);
+
+        if(DataStorage.ExistKey("authorizedUser")==true)
+        {
+            user = (User)DataStorage.Get("authorizedUser");
+        }
+        else
+        {
+            user = null;
+        }
+    }
+
+    public void InitializeViewFlipper()
+    {
         viewFlipperImages = view.findViewById(R.id.viewFlipperSearchImages);
         viewFlipperImages.setOnTouchListener(viewFlipperImagesOnTouch);
     }
@@ -43,7 +69,7 @@ public class ControllerSearchProductInfoFragment
         buttonGoBackToSearch.setOnClickListener(buttonGoBackToSearchOnClick);
 
         Button buttonAddToCart = view.findViewById(R.id.buttonSearchAddToCart);
-        buttonAddToCart.setOnClickListener(null);
+        buttonAddToCart.setOnClickListener(buttonAddToCartOnClick);
     }
 
     private View.OnClickListener buttonGoBackToSearchOnClick = new View.OnClickListener()  {
@@ -66,14 +92,77 @@ public class ControllerSearchProductInfoFragment
         fragmentTransaction.commit();
     }
 
+    private View.OnClickListener buttonAddToCartOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(user!=null)
+            {
+                AddProductToCart();
+            }
+            else
+            {
+                Context context = (Context) DataStorage.Get("context");
+
+                Toast.makeText(context,"Ошибка. Пожалуйста зарегистрируйтесь или авторизуйтесь", Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
+    private void AddProductToCart()
+    {
+        counter=1;
+
+        MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+        AlertDialog.Builder dialogWindow  = new AlertDialog.Builder(mainActivity);
+        dialogWindow.setTitle(product.getName());
+
+        LayoutInflater inflater = mainActivity.getLayoutInflater();
+        View alertDialogView = inflater.inflate(R.layout.alert_dialog_add_to_cart_choose, null);
+        dialogWindow.setView(alertDialogView);
+
+        Button buttonAlertDialogMinus = alertDialogView.findViewById(R.id.buttonAlertDialogMinus);
+        Button buttonAlertDialogPlus = alertDialogView.findViewById(R.id.buttonAlertDialogPlus);
+
+        TextView textViewAlertDialogCountProduct = alertDialogView.findViewById(R.id.textViewAlertDialogCountProduct);
+        textViewAlertDialogCountProduct.setText(Integer.toString(counter));
+
+        buttonAlertDialogMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(counter>1) {counter--;}
+                textViewAlertDialogCountProduct.setText(Integer.toString(counter));
+            }
+        });
+
+        buttonAlertDialogPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(counter<product.getCountLeft()) {counter++;}
+                textViewAlertDialogCountProduct.setText(Integer.toString(counter));
+            }
+        });
+
+        dialogWindow.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                CartItem cartItem = new CartItem(user.getId(),product.getId(),counter);
+                db.GetTableCart().AddToCart(cartItem);
+            }
+        });
+
+        dialogWindow.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        dialogWindow.setCancelable(true);
+        dialogWindow.create().show();
+    }
+
     public void FillInfoFields()
     {
-        int productId = (int)DataStorage.Get("productId");
-        DataStorage.Delete("productId");
-
-        Product product = db.GetTableProducts().GetById(productId);
-
-        ArrayList<ProductPicture> productPictures = db.GetTableProductsPictures().GetProductPictures(productId);
+        ArrayList<ProductPicture> productPictures = db.GetTableProductsPictures().GetProductPictures(product.getId());
 
         Context context = (Context) DataStorage.Get("context");
 
