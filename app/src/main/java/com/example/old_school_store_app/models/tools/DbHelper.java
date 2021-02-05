@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app12.db",null,1);
+        super(context,"app123.db",null,1);
     }
 
     @Override
@@ -57,6 +57,13 @@ public class DbHelper extends SQLiteOpenHelper
                 "    \"value_field\"    TEXT NOT NULL,\n" +
                 "    PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ");");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"cart\" (\n" +
+                "\t\"user_id\"\tINTEGER NOT NULL,\n" +
+                "\t\"product_id\"\tINTEGER NOT NULL,\n" +
+                "\t\"count_product\"\tINTEGER NOT NULL,\n" +
+                "\tPRIMARY KEY(\"user_id\",\"product_id\")\n" +
+                ")");
 
         db.execSQL("DELETE FROM categories");
         db.execSQL("DELETE FROM products");

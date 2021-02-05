@@ -147,6 +147,9 @@ public class ControllerSearchProductInfoFragment
             public void onClick(DialogInterface dialog, int which) {
                 CartItem cartItem = new CartItem(user.getId(),product.getId(),counter);
                 db.GetTableCart().AddToCart(cartItem);
+
+                Context context = (Context) DataStorage.Get("context");
+                Toast.makeText(context,"Продукт успешно добавлен", Toast.LENGTH_LONG).show();
             }
         });
 
