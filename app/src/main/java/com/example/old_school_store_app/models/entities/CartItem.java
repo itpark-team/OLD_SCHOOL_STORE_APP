@@ -6,6 +6,8 @@ public class CartItem
     private int productId;
     private int countProducts;
 
+    private Product product;
+
     public CartItem(int userId, int productId, int countProducts) {
         this.userId = userId;
         this.productId = productId;
@@ -22,5 +24,13 @@ public class CartItem
 
     public int getCountProducts() {
         return countProducts;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
