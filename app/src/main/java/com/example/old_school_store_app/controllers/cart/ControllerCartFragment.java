@@ -92,7 +92,7 @@ public class ControllerCartFragment
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerViewCartList.setLayoutManager(llm);
 
-        RvAdapterCart adapter = new RvAdapterCart(userProducts);
+        RvAdapterCart adapter = new RvAdapterCart(userProducts, db);
         recyclerViewCartList.setAdapter(adapter);
     }
 

@@ -33,4 +33,20 @@ public class CartItem
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public void PlusCountProducts()
+    {
+        if(countProducts<product.getCountLeft())
+        {
+            countProducts++;
+        }
+    }
+
+    public void MinusCountProducts()
+    {
+        if(countProducts>1)
+        {
+            countProducts--;
+        }
+    }
 }
