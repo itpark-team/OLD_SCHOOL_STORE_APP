@@ -17,6 +17,7 @@ import com.example.old_school_store_app.models.entities.ProductPicture;
 import com.example.old_school_store_app.models.entities.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ControllerCartFragment
 {
@@ -41,33 +42,7 @@ public class ControllerCartFragment
         }
     }
 
-    public void InitializeButtonsClick()
-    {
-        Button buttonCartMakeOrder = view.findViewById(R.id.buttonCartMakeOrder);
-        buttonCartMakeOrder.setOnClickListener(null);
-
-        Button buttonCartResetOrder = view.findViewById(R.id.buttonCartResetOrder);
-        buttonCartResetOrder.setOnClickListener(null);
-    }
-
-    public void FillUserFields()
-    {
-        TextView textViewCartUserName = view.findViewById(R.id.textViewCartUserName);
-        TextView textViewCartUserPhone = view.findViewById(R.id.textViewCartUserPhone);
-
-        if(user!=null)
-        {
-            textViewCartUserName.setText(user.getName());
-            textViewCartUserPhone.setText(user.getPhone());
-        }
-        else
-        {
-            textViewCartUserName.setText("Пользователь не авторизован");
-            textViewCartUserPhone.setText("Пользователь не авторизован");
-        }
-    }
-
-    public void ShowCartProducts()
+    private ArrayList<CartItem> GetUserProducts()
     {
         Context context = (Context) DataStorage.Get("context");
 
@@ -88,11 +63,69 @@ public class ControllerCartFragment
             userProduct.setProduct(product);
         }
 
+        return userProducts;
+    }
+
+    public int GetTotalOrderSum()
+    {
+        int sum = 0;
+
+        ArrayList<CartItem> userProducts = GetUserProducts();
+
+        for (int i = 0; i < userProducts.size(); i++)
+        {
+            CartItem currentProduct = userProducts.get(i);
+            sum += currentProduct.getProduct().getPrice()*currentProduct.getCountProducts();
+        }
+
+        return sum;
+    }
+
+    public void UpdateTotalOrderSum()
+    {
+        TextView textViewTotalOrderPrice = view.findViewById(R.id.textViewTotalOrderPrice);
+        textViewTotalOrderPrice.setText("Общая сумма заказ: "+Integer.toString(GetTotalOrderSum())+" руб.");
+    }
+
+    public void InitializeButtonsClick()
+    {
+        Button buttonCartMakeOrder = view.findViewById(R.id.buttonCartMakeOrder);
+        buttonCartMakeOrder.setOnClickListener(null);
+
+        Button buttonCartResetOrder = view.findViewById(R.id.buttonCartResetOrder);
+        buttonCartResetOrder.setOnClickListener(null);
+    }
+
+    public void FillUserFields()
+    {
+        TextView textViewCartUserName = view.findViewById(R.id.textViewCartUserName);
+        TextView textViewCartUserPhone = view.findViewById(R.id.textViewCartUserPhone);
+        TextView textViewTotalOrderPrice = view.findViewById(R.id.textViewTotalOrderPrice);
+
+        if(user!=null)
+        {
+            textViewCartUserName.setText(user.getName());
+            textViewCartUserPhone.setText(user.getPhone());
+            UpdateTotalOrderSum();
+        }
+        else
+        {
+            textViewCartUserName.setText("Пользователь не авторизован");
+            textViewCartUserPhone.setText("Пользователь не авторизован");
+            textViewTotalOrderPrice.setText("Пользователь не авторизован");
+        }
+    }
+
+    public void ShowCartProducts()
+    {
+        ArrayList<CartItem> userProducts = GetUserProducts();
+        Context context = (Context) DataStorage.Get("context");
+
         RecyclerView recyclerViewCartList = view.findViewById(R.id.recyclerViewCartList);
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerViewCartList.setLayoutManager(llm);
 
-        RvAdapterCart adapter = new RvAdapterCart(userProducts, db);
+        RvAdapterCart adapter = new RvAdapterCart(userProducts, db, this);
         recyclerViewCartList.setAdapter(adapter);
     }
 

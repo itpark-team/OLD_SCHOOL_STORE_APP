@@ -37,7 +37,15 @@
         android:text="TextView"
         android:textSize="24sp" />
 
-    <Button
+        <TextView
+            android:id="@+id/textViewTotalOrderPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAlignment="textEnd"
+            android:textSize="24sp" />
+
+        <Button
         android:id="@+id/buttonCartMakeOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

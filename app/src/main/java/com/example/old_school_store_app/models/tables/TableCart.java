@@ -44,6 +44,17 @@ public class TableCart
         return cartItems;
     }
 
+    public void UpdateCartProductCountByProductIdAndUserId(int userId, int productId, int productCount)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "UPDATE cart SET count_product="+productCount+" WHERE user_id="+userId+" AND product_id="+productId;
+
+        db.execSQL(sqlCommand);
+
+        dbHelper.close();
+    }
+
     public void AddToCart(CartItem cartItem)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -72,6 +83,17 @@ public class TableCart
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         db.execSQL("DELETE FROM cart WHERE user_id="+userId);
+
+        dbHelper.close();
+    }
+
+    public void DeleteCartItemByProductIdAndUserId(int userId, int productId)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "DELETE FROM cart WHERE user_id = "+userId+" AND product_id = "+productId;
+
+        db.execSQL(sqlCommand);
 
         dbHelper.close();
     }

@@ -17,6 +17,7 @@ public class CartFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         ControllerCartFragment controller = new ControllerCartFragment(view);
+
         controller.InitializeButtonsClick();
         controller.FillUserFields();
         controller.ShowCartProducts();

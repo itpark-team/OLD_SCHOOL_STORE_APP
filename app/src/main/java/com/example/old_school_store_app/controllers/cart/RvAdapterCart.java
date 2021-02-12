@@ -1,5 +1,6 @@
 package com.example.old_school_store_app.controllers.cart;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.old_school_store_app.R;
@@ -14,6 +16,7 @@ import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.CartItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHolder>
 {
@@ -47,12 +50,14 @@ public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHo
     private ArrayList<CartItem> userProducts;
     private int totalPrice;
     private DbManager db;
+    private ControllerCartFragment controller;
 
-    public RvAdapterCart (ArrayList<CartItem> userProducts, DbManager db)
+    public RvAdapterCart (ArrayList<CartItem> userProducts, DbManager db, ControllerCartFragment controller)
     {
         this.userProducts = userProducts;
         this.totalPrice = 0;
         this.db = db;
+        this.controller = controller;
     }
 
     @Override
@@ -94,6 +99,10 @@ public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHo
             public void onClick(View view) {
                 currentProduct.MinusCountProducts();
 
+                db.GetTableCart().UpdateCartProductCountByProductIdAndUserId(currentProduct.getUserId(), currentProduct.getProductId(), currentProduct.getCountProducts());
+
+                controller.UpdateTotalOrderSum();
+
                 cartViewHolder.productCartCount.setText(Integer.toString(currentProduct.getCountProducts()));
 
                 totalPrice = currentProduct.getCountProducts() * currentProduct.getProduct().getPrice();
@@ -107,6 +116,10 @@ public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHo
             public void onClick(View view) {
                 currentProduct.PlusCountProducts();
 
+                db.GetTableCart().UpdateCartProductCountByProductIdAndUserId(currentProduct.getUserId(), currentProduct.getProductId(), currentProduct.getCountProducts());
+
+                controller.UpdateTotalOrderSum();
+
                 cartViewHolder.productCartCount.setText(Integer.toString(currentProduct.getCountProducts()));
 
                 totalPrice = currentProduct.getCountProducts() * currentProduct.getProduct().getPrice();
@@ -116,6 +129,7 @@ public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHo
         });
 
         cartViewHolder.buttonDeleteCartProduct.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 //1 удалить из списка  private ArrayList<CartItem> userProducts; продукт с нужным ИД
@@ -123,10 +137,24 @@ public class RvAdapterCart extends RecyclerView.Adapter<RvAdapterCart.CartViewHo
 
                 //3 написать процедуру удаления в таблице TableCart
 
-                userProducts.remove(0);
+                //todo пересчитать общую сумму заказ
 
-                notifyItemRemoved(0);
-                notifyItemRangeChanged(0, userProducts.size());
+                db.GetTableCart().DeleteCartItemByProductIdAndUserId(currentProduct.getUserId(), currentProduct.getProductId());
+
+                controller.UpdateTotalOrderSum();
+
+                for (int k = 0; k < userProducts.size(); k++)
+                {
+                    if(userProducts.get(k).getProductId() == currentProduct.getProductId())
+                    {
+                        userProducts.remove(k);
+
+                        notifyItemRemoved(k);
+                        notifyItemRangeChanged(k, userProducts.size());
+
+                        break;
+                    }
+                }
             }
         });
 
