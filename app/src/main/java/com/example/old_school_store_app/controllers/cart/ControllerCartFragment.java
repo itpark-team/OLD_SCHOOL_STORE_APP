@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -152,6 +153,11 @@ public class ControllerCartFragment
             db.GetTableCart().ClearCartByUser(user.getId());
             UpdateTotalOrderSum();
             ShowCartProducts();
+
+            Context context = (Context) DataStorage.Get("context");
+            db = DbManager.GetInstance(context);
+
+            Toast.makeText(context,"Ваш заказ успешно принят!", Toast.LENGTH_LONG).show();
         }
     };
 
