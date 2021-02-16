@@ -65,6 +65,21 @@ public class DbHelper extends SQLiteOpenHelper
                 "\tPRIMARY KEY(\"user_id\",\"product_id\")\n" +
                 ")");
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"orders\" (\n" +
+                "\"id\" INTEGER NOT NULL,\n" +
+                "\"user_id\" INTEGER NOT NULL,\n" +
+                "\"dt\" INTEGER NOT NULL,\n" +
+                "\"total_price\" INTEGER NOT NULL,\n" +
+                "PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
+                ")");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"orders_products_id\" (\n" +
+                "\"order_id\" INTEGER NOT NULL,\n" +
+                "\"order_product_id\" INTEGER NOT NULL,\n" +
+                "\"count_product\" INTEGER NOT NULL,\n" +
+                "PRIMARY KEY(\"order_id\",\"order_product_id\")\n" +
+                ")");
+
         db.execSQL("DELETE FROM categories");
         db.execSQL("DELETE FROM products");
         db.execSQL("DELETE FROM products_pictures");

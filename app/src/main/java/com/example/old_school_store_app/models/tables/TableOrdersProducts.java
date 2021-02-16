@@ -45,4 +45,16 @@ public class TableOrdersProducts
 
         return orderProducts;
     }
+
+    public void AddNewOrder(int order_id, ArrayList<CartItem> products){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for (int i = 0; i < products.size(); i++)
+        {
+            CartItem currentProduct = products.get(i);
+            db.execSQL("INSERT INTO orders_products_id(order_id, order_product_id, count_product) VALUES("+order_id+","+currentProduct.getProductId()+","+currentProduct.getCountProducts()+")");
+        }
+
+        dbHelper.close();
+    }
 }

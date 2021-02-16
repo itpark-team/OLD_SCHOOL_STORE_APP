@@ -125,7 +125,7 @@ public class ControllerCartFragment
     public void InitializeButtonsClick()
     {
         Button buttonCartMakeOrder = view.findViewById(R.id.buttonCartMakeOrder);
-        buttonCartMakeOrder.setOnClickListener(null);
+        buttonCartMakeOrder.setOnClickListener(buttonCartMakeOrderOnClick);
 
         Button buttonCartResetOrder = view.findViewById(R.id.buttonCartResetOrder);
         buttonCartResetOrder.setOnClickListener(buttonCartResetOrderOnClick);
@@ -135,6 +135,20 @@ public class ControllerCartFragment
         @Override
         public void onClick(View view)
         {
+            db.GetTableCart().ClearCartByUser(user.getId());
+            UpdateTotalOrderSum();
+            ShowCartProducts();
+        }
+    };
+
+    private View.OnClickListener buttonCartMakeOrderOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            db.GetTableOrders().AddNew(user.getId(),(int)(System.currentTimeMillis()/1000), GetTotalOrderSum());
+
+            int orderId = db.GetTableOrders().GetLastInsertId();
+            db.GetTableOrdersProducts().AddNewOrder(orderId,GetUserProducts());
+
             db.GetTableCart().ClearCartByUser(user.getId());
             UpdateTotalOrderSum();
             ShowCartProducts();

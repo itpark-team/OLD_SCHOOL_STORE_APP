@@ -44,4 +44,29 @@ public class TableOrders {
 
         return orders;
     }
+
+    public void AddNew(int user_id,int dt, int total_price)
+    {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.execSQL("INSERT INTO orders(user_id, dt, total_price) VALUES("+user_id+","+dt+","+total_price+")");
+
+        dbHelper.close();
+    }
+
+    public int GetLastInsertId(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT last_insert_rowid()";
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+        cursor.moveToNext();
+
+        int lastInsertId =cursor.getInt(0);
+
+        cursor.close();
+        dbHelper.close();
+
+        return lastInsertId;
+    }
 }
