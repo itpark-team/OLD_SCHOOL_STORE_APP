@@ -76,14 +76,14 @@ public class ControllerCartFragment
         if (user!=null)
         {
             linearLayoutCart.setVisibility(View.VISIBLE);
-            textViewShowWarning.setVisibility(View.INVISIBLE);
+            textViewShowWarning.setVisibility(View.GONE);
             InitializeButtonsClick();
             FillUserFields();
             ShowCartProducts();
         }
         else
         {
-            linearLayoutCart.setVisibility(View.INVISIBLE);
+            linearLayoutCart.setVisibility(View.GONE);
             textViewShowWarning.setVisibility(View.VISIBLE);
             ShowWarning();
         }
@@ -106,8 +106,20 @@ public class ControllerCartFragment
 
     public void UpdateTotalOrderSum()
     {
+        int totalSum = GetTotalOrderSum();
+        TextView textViewCartEmptyMessage = view.findViewById(R.id.textViewCartEmptyMessage);
+
+        if(totalSum==0)
+        {
+            textViewCartEmptyMessage.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            textViewCartEmptyMessage.setVisibility(View.GONE);
+        }
+
         TextView textViewTotalOrderPrice = view.findViewById(R.id.textViewTotalOrderPrice);
-        textViewTotalOrderPrice.setText("Общая сумма заказ: "+Integer.toString(GetTotalOrderSum())+" руб.");
+        textViewTotalOrderPrice.setText("Общая сумма заказ: "+Integer.toString(totalSum)+" руб.");
     }
 
     public void InitializeButtonsClick()
