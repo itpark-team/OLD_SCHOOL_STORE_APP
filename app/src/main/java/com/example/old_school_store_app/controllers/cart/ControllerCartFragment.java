@@ -3,6 +3,7 @@ package com.example.old_school_store_app.controllers.cart;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,13 +18,14 @@ import com.example.old_school_store_app.models.entities.ProductPicture;
 import com.example.old_school_store_app.models.entities.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ControllerCartFragment
 {
     private View view;
     private DbManager db;
     private User user;
+    private LinearLayout linearLayoutCart;
+    private TextView textViewShowWarning;
 
     public ControllerCartFragment(View view)
     {
@@ -31,6 +33,9 @@ public class ControllerCartFragment
 
         Context context = (Context) DataStorage.Get("context");
         db = DbManager.GetInstance(context);
+
+        linearLayoutCart = view.findViewById(R.id.linearLayoutCart);
+        textViewShowWarning = view.findViewById(R.id.textViewShowWarning);
 
         if(DataStorage.ExistKey("authorizedUser")==true)
         {
@@ -66,6 +71,24 @@ public class ControllerCartFragment
         return userProducts;
     }
 
+    public void LoadingCart()
+    {
+        if (user!=null)
+        {
+            linearLayoutCart.setVisibility(View.VISIBLE);
+            textViewShowWarning.setVisibility(View.INVISIBLE);
+            InitializeButtonsClick();
+            FillUserFields();
+            ShowCartProducts();
+        }
+        else
+        {
+            linearLayoutCart.setVisibility(View.INVISIBLE);
+            textViewShowWarning.setVisibility(View.VISIBLE);
+            ShowWarning();
+        }
+    }
+
     public int GetTotalOrderSum()
     {
         int sum = 0;
@@ -93,8 +116,19 @@ public class ControllerCartFragment
         buttonCartMakeOrder.setOnClickListener(null);
 
         Button buttonCartResetOrder = view.findViewById(R.id.buttonCartResetOrder);
-        buttonCartResetOrder.setOnClickListener(null);
+        buttonCartResetOrder.setOnClickListener(buttonCartResetOrderOnClick);
     }
+
+    private View.OnClickListener buttonCartResetOrderOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view)
+        {
+            db.GetTableCart().ClearCartByUser(user.getId());
+            UpdateTotalOrderSum();
+            ShowCartProducts();
+        }
+    };
+
 
     public void FillUserFields()
     {
@@ -129,5 +163,9 @@ public class ControllerCartFragment
         recyclerViewCartList.setAdapter(adapter);
     }
 
-
+    public void ShowWarning()
+    {
+        TextView textViewShowWarning = view.findViewById(R.id.textViewShowWarning);
+        textViewShowWarning.setText("Пожалуйста зарегистрируйтесь или авторизуйтесь для оформления заказов");
+    }
 }
