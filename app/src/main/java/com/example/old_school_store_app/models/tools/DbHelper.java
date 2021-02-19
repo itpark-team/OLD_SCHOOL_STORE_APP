@@ -73,7 +73,7 @@ public class DbHelper extends SQLiteOpenHelper
                 "PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                 ")");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS \"orders_products_id\" (\n" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS \"orders_products\" (\n" +
                 "\"order_id\" INTEGER NOT NULL,\n" +
                 "\"order_product_id\" INTEGER NOT NULL,\n" +
                 "\"count_product\" INTEGER NOT NULL,\n" +

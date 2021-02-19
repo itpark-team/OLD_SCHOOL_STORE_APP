@@ -15,6 +15,7 @@ import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.User;
 import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.InitialUserFragment;
+import com.example.old_school_store_app.views.user.UserOrdersFragment;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -60,6 +61,9 @@ public class ControllerShowUserFragment
 
     public void InitializeButtonsClick()
     {
+        Button buttonGoToShowOrders = view.findViewById(R.id.buttonGoToShowOrders);
+        buttonGoToShowOrders.setOnClickListener(OnButtonGoToShowOrders);
+
         Button buttonExitFromAcc = view.findViewById(R.id.buttonExitFromAcc);
         buttonExitFromAcc.setOnClickListener(OnButtonExitFromAccClickListener);
 
@@ -112,6 +116,21 @@ public class ControllerShowUserFragment
             {
                 db.GetTableSettingsApp().Update("showTutorial", "0");
             }
+        }
+    };
+
+    View.OnClickListener OnButtonGoToShowOrders = new View.OnClickListener() {
+        @Override
+        public void onClick(View view)
+        {
+            UserOrdersFragment userOrdersFragment = new UserOrdersFragment();
+
+            MainActivity mainActivity = (MainActivity) DataStorage.Get("mainActivity");
+
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = mainActivity.getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentsContainerMain, userOrdersFragment);
+            fragmentTransaction.commit();
         }
     };
 }

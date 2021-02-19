@@ -15,7 +15,7 @@ import com.example.old_school_store_app.views.main.MainActivity;
 import com.example.old_school_store_app.views.user.InitialUserFragment;
 import com.example.old_school_store_app.views.user.ShowUserFragment;
 
-public class ControllerAuthUserFragment
+public class  ControllerAuthUserFragment
 {
     private View view;
     private DbManager db;

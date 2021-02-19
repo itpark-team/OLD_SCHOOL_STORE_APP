@@ -84,6 +84,12 @@
         android:textSize="24sp" />
 
     <Button
+        android:id="@+id/buttonGoToShowOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Просмотр заказов" />
+
+    <Button
         android:id="@+id/buttonExitFromAcc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

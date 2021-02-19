@@ -52,7 +52,7 @@ public class TableOrdersProducts
         for (int i = 0; i < products.size(); i++)
         {
             CartItem currentProduct = products.get(i);
-            db.execSQL("INSERT INTO orders_products_id(order_id, order_product_id, count_product) VALUES("+order_id+","+currentProduct.getProductId()+","+currentProduct.getCountProducts()+")");
+            db.execSQL("INSERT INTO orders_products(order_id, order_product_id, count_product) VALUES("+order_id+","+currentProduct.getProductId()+","+currentProduct.getCountProducts()+")");
         }
 
         dbHelper.close();
