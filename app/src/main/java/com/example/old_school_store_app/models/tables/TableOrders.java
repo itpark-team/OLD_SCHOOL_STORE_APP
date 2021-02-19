@@ -17,13 +17,13 @@ public class TableOrders {
         this.dbHelper = dbHelper;
     }
 
-    public ArrayList<Order> getAll()
+    public ArrayList<Order> GetByUserId(int UserId)
     {
         ArrayList<Order> orders = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT * FROM `orders`";
+        String sqlCommand = "SELECT * FROM `orders` WHERE user_id="+UserId;
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
 
