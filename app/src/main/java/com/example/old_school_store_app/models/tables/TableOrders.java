@@ -51,7 +51,9 @@ public class TableOrders {
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        db.execSQL("INSERT INTO orders(user_id, dt, total_price) VALUES("+user_id+","+dt+","+total_price+")");
+        String sqlCommand = "INSERT INTO orders(user_id, dt, total_price) VALUES("+user_id+","+dt+","+total_price+")";
+
+        db.execSQL(sqlCommand);
 
         dbHelper.close();
     }
@@ -62,7 +64,7 @@ public class TableOrders {
         String sqlCommand = "SELECT last_insert_rowid()";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
-        cursor.moveToNext();
+        boolean resultInsert = cursor.moveToNext();
 
         int lastInsertId = cursor.getInt(0);
 

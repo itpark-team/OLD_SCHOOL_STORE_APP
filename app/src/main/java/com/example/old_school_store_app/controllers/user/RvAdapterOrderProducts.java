@@ -1,5 +1,6 @@
 package com.example.old_school_store_app.controllers.user;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.old_school_store_app.R;
+import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
 import com.example.old_school_store_app.models.entities.Order;
 import com.example.old_school_store_app.models.entities.OrderProduct;
+import com.example.old_school_store_app.models.entities.Product;
+import com.example.old_school_store_app.models.entities.ProductPicture;
 
 import java.util.ArrayList;
 
 public class RvAdapterOrderProducts extends RecyclerView.Adapter<RvAdapterOrderProducts.OrderViewHolder> {
 
     private DbManager db;
-    private ArrayList<Order> order;
     private ArrayList<OrderProduct> orderProducts;
 
-
-
-    public RvAdapterOrderProducts(ArrayList<Order> order, DbManager db) {
-        this.order = order;
+    public RvAdapterOrderProducts(ArrayList<OrderProduct> orderProducts, DbManager db) {
+        this.orderProducts = orderProducts;
         this.db = db;
-        orderIndex = 0;
+
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder{
@@ -37,10 +38,8 @@ public class RvAdapterOrderProducts extends RecyclerView.Adapter<RvAdapterOrderP
         public TextView orderProductCount;
         public TextView orderProductTotalPrice;
 
-
         public OrderViewHolder(View itemView) {
             super(itemView);
-
 
             orderProductPicture = itemView.findViewById(R.id.orderProductPicture);
             orderProductName = itemView.findViewById(R.id.orderProductName);
@@ -53,27 +52,36 @@ public class RvAdapterOrderProducts extends RecyclerView.Adapter<RvAdapterOrderP
 
 
     public RvAdapterOrderProducts.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_user_orders, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.order_producs_view, viewGroup, false);
         RvAdapterOrderProducts.OrderViewHolder cvh = new RvAdapterOrderProducts.OrderViewHolder(v);
         return cvh;
     }
 
     @Override
     public void onBindViewHolder(OrderViewHolder orderViewHolder, int i) {
-        Order currentOrder = order.get(i);
-        orderProducts = db.GetTableOrdersProducts().getByOrderId(currentOrder.getId());
-        OrderProduct currentProduct = orderProducts.get(i);
 
+        Product currentProduct = db.GetTableProducts().GetById(orderProducts.get(i).getOrderProductId());
 
-        orderViewHolder.orderProductPicture.setImageResource(db.GetTableProducts().GetById(currentProduct.getOrderProductId()).getMainPictureId());
-        orderViewHolder.orderProductCount.setText("Количество:"+currentProduct.getCountProduct());
-        orderViewHolder.orderProductName.setText(db.GetTableProducts().GetById(currentProduct.getOrderProductId()).getName());
-        orderViewHolder.orderProductPrice.setText("Цена:"+db.GetTableProducts().GetById(currentProduct.getOrderProductId()).getPrice());
-        orderViewHolder.orderProductTotalPrice.setText("Итого:"+(currentProduct.getCountProduct()*db.GetTableProducts().GetById(currentProduct.getOrderProductId()).getPrice()));
+        Context context = (Context) DataStorage.Get("context");
+
+        ProductPicture picture = db.GetTableProductsPictures().GetMainProductPicture(currentProduct.getId());
+
+        int mainPicture = context.getResources().getIdentifier(picture.getPicturePath(),"drawable", context.getPackageName());
+
+        currentProduct.setMainPictureId(mainPicture);
+
+        orderViewHolder.orderProductPicture.setImageResource(currentProduct.getMainPictureId());
+
+        orderViewHolder.orderProductCount.setText("Количество:"+orderProducts.get(i).getCountProduct());
+        orderViewHolder.orderProductName.setText(currentProduct.getName());
+
+        orderViewHolder.orderProductPrice.setText("Цена:"+currentProduct.getPrice());
+
+        orderViewHolder.orderProductTotalPrice.setText("Итого:"+currentProduct.getPrice()*orderProducts.get(i).getCountProduct());
     }
 
     @Override
     public int getItemCount() {
-        return order.size();
+        return orderProducts.size();
     }
 }

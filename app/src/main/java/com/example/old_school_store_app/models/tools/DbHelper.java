@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper
 {
     public DbHelper(Context context)
     {
-        super(context,"app1234.db",null,1);
+        super(context,"app987.db",null,1);
     }
 
     @Override
@@ -84,6 +84,10 @@ public class DbHelper extends SQLiteOpenHelper
         db.execSQL("DELETE FROM products");
         db.execSQL("DELETE FROM products_pictures");
         db.execSQL("DELETE FROM users");
+
+//        db.execSQL("DELETE FROM orders");
+//        db.execSQL("DELETE FROM orders_products");
+//        db.execSQL("DELETE FROM cart");
 
         db.execSQL("INSERT INTO \"categories\" (\"id\",\"name\",\"description\",\"picture_path\") VALUES (1,'Консоли','лёгкое, компактное, портативное электронное устройство, предназначенное для того, чтобы играть в видеоигры.','category_console'),\n" +
                 " (2,'Диски','Игра, которая предназначена для игр на типа игровой консоли.','category_cds'),\n" +

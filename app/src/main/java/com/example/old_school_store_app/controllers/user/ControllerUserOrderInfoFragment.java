@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.old_school_store_app.R;
 import com.example.old_school_store_app.models.DataStorage;
 import com.example.old_school_store_app.models.DbManager;
+import com.example.old_school_store_app.models.entities.CartItem;
 import com.example.old_school_store_app.models.entities.Order;
 import com.example.old_school_store_app.models.entities.OrderProduct;
 import com.example.old_school_store_app.models.entities.User;
@@ -19,13 +20,9 @@ import com.example.old_school_store_app.views.user.UserOrdersFragment;
 
 import java.util.ArrayList;
 
-public class    ControllerUserOrderInfoFragment {
+public class ControllerUserOrderInfoFragment {
     private View view;
     private DbManager db;
-    private User user;
-    private RecyclerView recyclerViewOrderProductsList;
-    private ArrayList<Order> orders;
-    private ArrayList<OrderProduct> orderProducts;
 
     public ControllerUserOrderInfoFragment(View view)
     {
@@ -33,13 +30,7 @@ public class    ControllerUserOrderInfoFragment {
 
         Context context = (Context) DataStorage.Get("context");
         db = DbManager.GetInstance(context);
-
-        orders = db.GetTableOrders().GetByUserId(user.getId());
-
-
-        recyclerViewOrderProductsList = view.findViewById(R.id.recyclerViewOrderProductsList);
     }
-
 
 
     public void InitializeButtonsClick()
@@ -52,10 +43,18 @@ public class    ControllerUserOrderInfoFragment {
 
         Context context = (Context) DataStorage.Get("context");
 
+        int orderId = (int) DataStorage.Get("selectedOrderId");
+        DataStorage.Delete("selectedOrderId");
+
+        ArrayList<OrderProduct> orderProducts = db.GetTableOrdersProducts().getByOrderId(orderId);
+
+        RecyclerView recyclerViewOrderProductsList = view.findViewById(R.id.recyclerViewOrderProductsList);
+
         LinearLayoutManager llm = new LinearLayoutManager(context);
         recyclerViewOrderProductsList.setLayoutManager(llm);
 
-        RvAdapterOrderProducts adapter = new RvAdapterOrderProducts(orders,db);
+
+        RvAdapterOrderProducts adapter = new RvAdapterOrderProducts(orderProducts,db);
         recyclerViewOrderProductsList.setAdapter(adapter);
     }
 

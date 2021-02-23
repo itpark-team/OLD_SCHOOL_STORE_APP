@@ -31,7 +31,6 @@ public class ControllerCartFragment
     private User user;
     private LinearLayout linearLayoutCart;
     private TextView textViewShowWarning;
-    private ArrayList<CartItem> cartItems;
 
     public ControllerCartFragment(View view)
     {
@@ -44,7 +43,6 @@ public class ControllerCartFragment
         textViewShowWarning = view.findViewById(R.id.textViewShowWarning);
 
         dbHelper = new DbHelper(context);
-        cartItems = db.GetTableCart().GetRecordsByUser(user.getId());
 
         if(DataStorage.ExistKey("authorizedUser")==true)
         {
@@ -156,18 +154,12 @@ public class ControllerCartFragment
             db.GetTableOrders().AddNew(user.getId(),(int)(System.currentTimeMillis()/1000), GetTotalOrderSum());
 
             int orderId = db.GetTableOrders().GetLastInsertId();
-            db.GetTableOrdersProducts().AddNewOrder(orderId,GetUserProducts());
 
+            ArrayList<CartItem> userProducts = GetUserProducts();
 
-            for (int i = 0; i < cartItems.size(); i++) {
-                SQLiteDatabase database = dbHelper.getWritableDatabase();
+            db.GetTableOrdersProducts().AddNewOrder(orderId,userProducts);
 
-                database.execSQL("UPDATE `products` SET count_left=count_left-"+db.GetTableCart().GetRecordsByUser(user.getId()).get(i).getCountProducts()+" WHERE id="+db.GetTableCart().GetRecordsByUser(user.getId()).get(i).getProductId());
-
-                dbHelper.close();
-            }
-
-
+            db.GetTableProducts().RecalculateCountProducts(userProducts);
 
             db.GetTableCart().ClearCartByUser(user.getId());
             UpdateTotalOrderSum();

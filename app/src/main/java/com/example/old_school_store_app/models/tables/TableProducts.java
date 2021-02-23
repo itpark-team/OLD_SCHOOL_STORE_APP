@@ -3,6 +3,7 @@ package com.example.old_school_store_app.models.tables;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.old_school_store_app.models.entities.CartItem;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.tools.DbHelper;
 
@@ -138,5 +139,18 @@ public class TableProducts
         dbHelper.close();
 
         return product;
+    }
+
+    public void RecalculateCountProducts(ArrayList<CartItem> products){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for (int i = 0; i < products.size(); i++)
+        {
+            CartItem currentProduct = products.get(i);
+
+            db.execSQL("UPDATE `products` SET count_left=count_left-"+currentProduct.getCountProducts()+" WHERE id="+currentProduct.getProductId());
+        }
+
+        dbHelper.close();
     }
 }

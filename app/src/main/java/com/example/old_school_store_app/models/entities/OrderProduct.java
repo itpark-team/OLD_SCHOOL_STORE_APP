@@ -6,7 +6,6 @@ public class OrderProduct
     private int orderProductId;
     private int countProduct;
 
-
     public OrderProduct(int orderId, int orderProductId, int countProduct) {
         this.orderId = orderId;
         this.orderProductId = orderProductId;
