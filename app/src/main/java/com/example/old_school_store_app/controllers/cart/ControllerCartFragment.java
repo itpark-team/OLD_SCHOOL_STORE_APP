@@ -1,6 +1,7 @@
 package com.example.old_school_store_app.controllers.cart;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,6 +18,8 @@ import com.example.old_school_store_app.models.entities.CartItem;
 import com.example.old_school_store_app.models.entities.Product;
 import com.example.old_school_store_app.models.entities.ProductPicture;
 import com.example.old_school_store_app.models.entities.User;
+import com.example.old_school_store_app.models.tables.TableCart;
+import com.example.old_school_store_app.models.tools.DbHelper;
 
 import java.util.ArrayList;
 
@@ -24,9 +27,11 @@ public class ControllerCartFragment
 {
     private View view;
     private DbManager db;
+    private DbHelper dbHelper;
     private User user;
     private LinearLayout linearLayoutCart;
     private TextView textViewShowWarning;
+    private ArrayList<CartItem> cartItems;
 
     public ControllerCartFragment(View view)
     {
@@ -37,6 +42,9 @@ public class ControllerCartFragment
 
         linearLayoutCart = view.findViewById(R.id.linearLayoutCart);
         textViewShowWarning = view.findViewById(R.id.textViewShowWarning);
+
+        dbHelper = new DbHelper(context);
+        cartItems = db.GetTableCart().GetRecordsByUser(user.getId());
 
         if(DataStorage.ExistKey("authorizedUser")==true)
         {
@@ -149,6 +157,17 @@ public class ControllerCartFragment
 
             int orderId = db.GetTableOrders().GetLastInsertId();
             db.GetTableOrdersProducts().AddNewOrder(orderId,GetUserProducts());
+
+
+            for (int i = 0; i < cartItems.size(); i++) {
+                SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+                database.execSQL("UPDATE `products` SET count_left=count_left-"+db.GetTableCart().GetRecordsByUser(user.getId()).get(i).getCountProducts()+" WHERE id="+db.GetTableCart().GetRecordsByUser(user.getId()).get(i).getProductId());
+
+                dbHelper.close();
+            }
+
+
 
             db.GetTableCart().ClearCartByUser(user.getId());
             UpdateTotalOrderSum();

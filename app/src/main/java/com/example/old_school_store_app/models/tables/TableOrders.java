@@ -45,6 +45,8 @@ public class TableOrders {
         return orders;
     }
 
+
+
     public void AddNew(int user_id,int dt, int total_price)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -62,7 +64,7 @@ public class TableOrders {
         Cursor cursor = db.rawQuery(sqlCommand,null);
         cursor.moveToNext();
 
-        int lastInsertId =cursor.getInt(0);
+        int lastInsertId = cursor.getInt(0);
 
         cursor.close();
         dbHelper.close();

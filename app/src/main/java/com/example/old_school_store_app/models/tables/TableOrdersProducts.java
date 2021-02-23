@@ -46,6 +46,33 @@ public class TableOrdersProducts
         return orderProducts;
     }
 
+    public ArrayList<OrderProduct> getByOrderId(int orderId)
+    {
+        ArrayList<OrderProduct> orderProducts = new ArrayList<>();
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sqlCommand = "SELECT * FROM `orders_products` WHERE order_id = " + orderId;
+
+        Cursor cursor = db.rawQuery(sqlCommand,null);
+
+        while (cursor.moveToNext() == true)
+        {
+            OrderProduct orderProduct = new OrderProduct(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2)
+            );
+
+            orderProducts.add(orderProduct);
+        }
+
+        cursor.close();
+        dbHelper.close();
+
+        return orderProducts;
+    }
+
     public void AddNewOrder(int order_id, ArrayList<CartItem> products){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
