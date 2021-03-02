@@ -61,7 +61,7 @@ public class TableOrders {
     public int GetLastInsertId(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sqlCommand = "SELECT last_insert_rowid()";
+        String sqlCommand = "SELECT max(id) FROM orders";
 
         Cursor cursor = db.rawQuery(sqlCommand,null);
         boolean resultInsert = cursor.moveToNext();
